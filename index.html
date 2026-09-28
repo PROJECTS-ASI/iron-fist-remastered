@@ -195,13 +195,15 @@
             <h1 class="Texo" id="Texo">¿LISTO PARA SALVAR<br> EL MUNDO? -> LVL: 1</h1> <!--Titulo de la seccion start-->
             
 
-            <div style="display: flex; justify-content: center; position: absolute; width: 100%;">
+
+           <div style="display: flex; justify-content: center; align-items: center; position: relative; width: 100%; gap: 25px;">
+            <!-- <div style="display: flex; justify-content: center; position: absolute; width: 100%;"cambio que esta ahi por defauld> -->
             <img src="IMG/Pez_Globo.gif" width="18%" id="chems1">
             <h1 class="Pollo">Dificultad: Pez globo</h1>
             <img src="IMG/Pez_Globo.gif" width="18%" id="chems2">
             </div>
 
-            <p class="Texto_mision_inicio">Lee las instrucciones y confirma la misión para comenzar.</p>
+            <p class="Texto_mision_inicio">.</p>
             <br> <button class="Play" id="Play" type="button">ACEPTAR MISIÓN</button><!--Botón de confirmar misión-->
             </div>
             <div id="Contenedor_contador"><span id="RGB"></span></div><!--Span que contiene el conteo-->
@@ -544,7 +546,7 @@
 
     function actualizarHUD(){
         if($('Tiempo')) $('Tiempo').textContent=String(tiempoNivel1);
-        if($('Puntaje')) $('Puntaje').innerHTML=String(puntosNivel1)+'&nbsp;/&nbsp;5';
+        if($('Puntaje')) $('Puntaje').innerHTML=String(puntosNivel1)+'&nbsp;/&nbsp;15';
     }
     function resetMeteorito(id){
         const el=$(id); if(!el) return;
@@ -583,9 +585,12 @@
     function ganarNivel1(){
         if(nivel1Ganado) return;
         nivel1Ganado=true; nivel1Iniciado=false; limpiarTimersNivel1();
+        Tiempolvl2 = tiempoNivel1;
+
         $('Fondo_Ciberpunk')?.pause();
         ['Meteiorito','Meteiorito2'].forEach(resetMeteorito);
         if($('GANASTE_PANTALLA')) $('GANASTE_PANTALLA').style.display='flex';
+        if($('NEXT')) $('NEXT').classList.add('habilitado');
         const triunfo=$('Triunfo'); if(triunfo){triunfo.currentTime=0; triunfo.play().catch(()=>{});}
         Swal.fire({
             title:'¡NIVEL SUPERADO!',
@@ -604,7 +609,7 @@
         puntosNivel1++;
         const p1=$('Puntos_sound'); if(p1){p1.currentTime=0;p1.play().catch(()=>{});}
         actualizarHUD();
-        if(puntosNivel1>=5) ganarNivel1();
+        if(puntosNivel1>=15) ganarNivel1();
     }
     function iniciarNivel1(){
         if(nivel1Iniciado) return;
@@ -643,6 +648,8 @@
     $('NEXT')?.addEventListener('click',()=>{
         if(!$('NEXT').classList.contains('habilitado')) return;
         if(nivelActualJuego===1){
+            Tiempolvl2 = tiempoNivel1;
+            document.getElementById("Tiempolvl2").innerHTML = Tiempolvl2;
             nivelActualJuego=2;
             $('NEXT').classList.remove('habilitado');
             if($('NIVEL_01')) $('NIVEL_01').style.display='none';

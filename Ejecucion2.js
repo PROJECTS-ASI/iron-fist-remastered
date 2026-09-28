@@ -8,7 +8,7 @@ Puntajelvl2 = 0 //VARIABLE DE INICIO PUNTOS
 //CONTENEDOR QUE CONTEIENE TOO EL JUEGO
 //DE POR SI ESTA FUNCION NO SE EJECUTA HASTA QUE SE LA LLAMA, MAS ADELANTE LA LLAMAREMOS
 //PARA QUE EL JUEGO INICIE UNA VEZ SE PRESIONE JUGAR
-function JUEGOlvl2(){ 
+function JUEGOlvl2(){
 
     function Tiempo_Disminurlvl2(){ //FUNCION QUE REDUCE EL TIEMPO Y RESETEAL EL RESULTADO UNA VEZ LLEGUE A 0
         Tiempolvl2--;
@@ -33,9 +33,9 @@ function JUEGOlvl2(){
             document.getElementById("Puntajelvl2").innerHTML = Puntajelvl2 + " / 4"
             if(Puntajelvl2 == 2){
                 Puntajelvl2 = 0 
-             
+                Tiempolvl2 = 61
 
-                document.getElementById("Tiempolvl2").innerHTML = Tiempolvl2
+                document.getElementById("Tiempolvl2").innerHTML = 60
                 document.getElementById("Puntajelvl2").innerHTML = 0+"&nbsp;/&nbsp;"+34
                 document.getElementById("Fondo_Ciberpunk").pause()
                 document.getElementById("Triunfo").play()
@@ -206,7 +206,6 @@ function JUEGOlvl2(){
             
             //ESTA FUNCION EJECUTA UN CONJUNTO DE ACCIONES AL PRESIONAR JUGAR
             function PLAYlvl2(){
-                document.getElementById("Tiempolvl2").innerHTML = Tiempolvl2
                 document.getElementById("Fondo_Ciberpunk").play()
                 //MUEVE EL TITULO FUERA DEL CONTENEDOR UNA VEZ DE CLICK A JUGAR
                 document.getElementById("Texolvl2").style.left = "-900px" 

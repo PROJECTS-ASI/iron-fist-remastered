@@ -3,7 +3,6 @@ html body{margin:0;padding:0;font-family:sans-serif;}
 #Fondo{background-image:url(IMG/Fondo_Espacio.gif);color:white;background-attachment:fixed;background-repeat:no-repeat;background-size:cover;}
 
 .Contenedor_Supremo{width:auto;height:100vh;overflow:hidden;}
-
 /* PRIMERAS 3 SECCIONES: se conserva el estilo original, sin tocar el juego */
 .Seccion_01{width:100%;height:100vh;overflow:hidden;position:relative;top:0;display:flex;flex-direction:column;align-items:center;justify-content:center;}
 .Nombre{font-family:'Press Start 2P',cursive;text-align:center;font-size:5.9vw;position:relative;top:0;margin:0 0 20px;padding:0;}
@@ -77,7 +76,7 @@ font-size: 60px;position: relative; top: 0%; left: -110%; padding-bottom: 2%;}
 .Tituloar_Juego_5 {font-family: 'Press Start 2P', cursive; text-align: center; font-size: 60px;}
 
 .Contenedor_Mensaje_Star{height: 60%; width: 100%; left: 0%;  background: transparent;
-position: absolute; top: 20%; overflow: hidden; transition: 2.3s;}
+position: absolute; top: 20%; overflow: visible; transition: 2.3s;}
 
 /*FONDO DE LA SECCION PRINCIPAL*/
 .Seccion_Juego {width: 100%; height: 160vh; 
@@ -106,20 +105,29 @@ position: absolute; top: 20%; overflow: hidden; transition: 2.3s;}
     color: white; text-align: center;}
     
     /*Boton de la pantalla start*/
-   .Play {
+ .Play {
     background: purple;
     color: white;
-    width: 220px;
+    width: 220px !important;
+    min-width: 220px !important;
+    max-width: 220px !important;
     height: 50px;
+    box-sizing: border-box;
+
     display: flex;
     align-items: center;
     justify-content: center;
+
     cursor: pointer;
-    position: relative;
-    top: 0;
-    left: 0;
+    position: absolute;
+    z-index: 999999;
+
+/* el boton de "aceptar mision" cambiar arriba o abajo*/
+    top: 90%;
+    left: 50%;
+    margin-left: -110px;
+
     font-family: 'Press Start 2P', cursive;
-    margin: 20px auto;
 }
 
     
@@ -395,17 +403,23 @@ margin-left: 12%; }
                 filter 0.2s ease;
 }
 
-.Play:hover,
+.Play:hover {
+    transform: translateX(-50%) scale(1.07);
+    filter: brightness(1.2);
+}
+
 .Playlvl2:hover {
     transform: scale(1.07);
     filter: brightness(1.2);
 }
 
-.Play:active,
+.Play:active {
+    transform: translateX(-50%) scale(0.96);
+}
+
 .Playlvl2:active {
     transform: scale(0.96);
 }
-
 
 
 /*LVL 2 ---------------------------------------------------------------------------------------------------------*/

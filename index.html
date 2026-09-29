@@ -281,6 +281,7 @@
                 <!--Contenedor general del juego-->
                 <div class="Contenedorlvl2">
                     <!--IMAGENES DEBTRO DE JUEGO-->
+                    <audio id="Music_level2" src="shell.mp3" preload="auto" autoplay loop></audio>
                     <img src="IMG/Metiorito.png" width="70px" class="Meteioritolvl2" id="Meteioritolvl2">
                     <img src="IMG/Metiorito.png" width="70px" class="Meteioritolvl2" id="Meteiorito2lvl2">
                     <img src="IMG/Metiorito.png" width="70px" class="Meteioritolvl2" id="Meteiorito3lvl2">
@@ -650,6 +651,8 @@
             }
             function lanzarMeteorito(id) {
                 const el = $(id); if (!el) return;
+                el._destino = '80%';
+                el._duracion = '2.4s';
                 el.style.left = '80%';
                 el.style.top = (Math.round(Math.random() * 380) + 20) + 'px';
             }
@@ -700,6 +703,8 @@
                 actualizarHUD();
                 // Expulsa el meteorito que fue golpeado
                 if (this && this.style) {
+                    this._destino = '-500px';
+                    this._duracion = '1.8s';
                     this.style.transition = '1.8s';
                     this.style.left = '-500px';
                     this.style.top = (Math.round(Math.random() * 450)) + 'px';
@@ -718,7 +723,7 @@
                     const el = $(id); if (!el) return;
                     el.onmouseenter = sumarPunto;
                     resetMeteorito(id);
-                    setTimeout(() => lanzarMeteorito(id), 500 + i * 900);
+                    setTimeout(() => { if (!pausaNivel1 && nivel1Iniciado) lanzarMeteorito(id); }, 500 + i * 900);
                 });
                 timerNivel1 = setInterval(() => {
                     if (pausaNivel1 || !nivel1Iniciado) return;
@@ -761,6 +766,26 @@
                 }
             });
 
+            function congelarMeteoritos() {
+                ['Meteiorito', 'Meteiorito2'].forEach(id => {
+                    const el = $(id); if (!el) return;
+                    const cs = getComputedStyle(el);
+                    const left = cs.left, top = cs.top;   // posición actual en px (incluye la transición en curso)
+                    el.style.transition = '0s';
+                    el.style.left = left;
+                    el.style.top = top;
+                });
+            }
+
+            function reanudarMeteoritos() {
+                ['Meteiorito', 'Meteiorito2'].forEach(id => {
+                    const el = $(id); if (!el || !el._destino) return;
+                    void el.offsetWidth;                  // fuerza reflow para aplicar el estado congelado
+                    el.style.transition = el._duracion || '2.4s';
+                    el.style.left = el._destino;
+                });
+            }
+
             $('Pause')?.addEventListener('click', () => {
                 if (!nivel1Iniciado || nivel1Ganado) return;
                 pausaNivel1 = !pausaNivel1;
@@ -768,6 +793,9 @@
                 if (btn) { btn.setAttribute('aria-pressed', String(pausaNivel1)); const h = btn.querySelector('h3'); if (h) h.textContent = pausaNivel1 ? 'REANUDAR' : 'PAUSAR'; }
                 if (pantalla) pantalla.style.display = pausaNivel1 ? 'table' : 'none';
                 const musica = $('Fondo_Ciberpunk'); if (musica) { if (pausaNivel1) musica.pause(); else musica.play().catch(() => { }); }
+
+                if (pausaNivel1) congelarMeteoritos();
+                else reanudarMeteoritos();
             });
 
             // Evita que un clic fuera del carrusel o un cambio de tamaño rompa la pantalla.

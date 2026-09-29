@@ -3927,4 +3927,52 @@ body {
     }
 }
 
+/* ===== PAUSA NIVEL 3: hover, clic y verde en REANUDAR ===== */
+#NIVEL3 #Pauselvl3.Pauselvl3 {
+    background: rgba(255, 0, 0, 0.15) !important;
+    border: 2px solid red !important;
+    color: #ff4d4d !important;
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.4) !important;
+    cursor: pointer;
+    transition: background .2s ease, box-shadow .2s ease, transform .2s ease !important;
+}
 
+#NIVEL3 #Pauselvl3.Pauselvl3 h3 {
+    margin: 0;
+    color: inherit !important;
+    pointer-events: none;
+}
+
+/* Hover en PAUSAR */
+#NIVEL3 #Pauselvl3.Pauselvl3:hover {
+    background: rgba(255, 0, 0, 0.5) !important;
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.9) !important;
+    transform: scale(1.06);
+}
+
+/* Clic en PAUSAR */
+#NIVEL3 #Pauselvl3.Pauselvl3:active {
+    background: rgba(140, 0, 0, 0.95) !important;
+    transform: scale(0.95);
+}
+
+/* Estado REANUDAR: verde */
+#NIVEL3 #Pauselvl3.Pauselvl3.Pauselvl3_Activo {
+    background: rgba(0, 255, 0, 0.18) !important;
+    border-color: limegreen !important;
+    color: #66ff66 !important;
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.6) !important;
+}
+
+/* Hover en REANUDAR */
+#NIVEL3 #Pauselvl3.Pauselvl3.Pauselvl3_Activo:hover {
+    background: rgba(0, 255, 0, 0.45) !important;
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.9) !important;
+    transform: scale(1.06);
+}
+
+/* Clic en REANUDAR */
+#NIVEL3 #Pauselvl3.Pauselvl3.Pauselvl3_Activo:active {
+    background: rgba(0, 110, 0, 0.95) !important;
+    transform: scale(0.95);
+}

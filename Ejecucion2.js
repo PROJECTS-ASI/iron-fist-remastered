@@ -1,22 +1,19 @@
 Tiempolvl2 = 61 //VARIBLE DE INICIO TIEMPO
 Puntajelvl2 = 0 //VARIABLE DE INICIO PUNTOS
-
-
-
-
+EnDerrotalvl2 = false //EVITA QUE SE DISPAREN VARIAS DERROTAS A LA VEZ
+Conteo_Reinicio_Intervallvl2 = null //MEJORA VARIABLE GLOBAL PARA EL INTERVALO DEL CONTEO DE REINICIO
+JuegoYaIniciadolvl2 = false //MEJORA
+Conteo_inicial_intervallvl2 = null
 
 //CONTENEDOR QUE CONTEIENE TOO EL JUEGO
 //DE POR SI ESTA FUNCION NO SE EJECUTA HASTA QUE SE LA LLAMA, MAS ADELANTE LA LLAMAREMOS
 //PARA QUE EL JUEGO INICIE UNA VEZ SE PRESIONE JUGAR
 function JUEGOlvl2() {
-    DETENER_JUEGOlvl2()
     function Tiempo_Disminurlvl2() { //FUNCION QUE REDUCE EL TIEMPO Y RESETEAL EL RESULTADO UNA VEZ LLEGUE A 0
         Tiempolvl2--;
         document.getElementById("Tiempolvl2").innerHTML = Tiempolvl2
         if (Tiempolvl2 == 0) {
-            Tiempolvl2 = 61
-            Puntajelvl2 = 0
-            alert("El tiempo se agotó, lo lamento, de seguro lo lograrás para la siguiente")
+            Perdiste_Alertalvl2("EL TIEMPO SE AGOTÓ. DE SEGURO LO LOGRARÁS EN EL SIGUIENTE INTENTO")
         }
     }
 
@@ -32,13 +29,13 @@ function JUEGOlvl2() {
     //FUNCION QUE UNICAMENTE AUMENTA PUNTOS Y RESETEA LAS VARIABLES AL LLEGAR A CIERTO LIMITE
     function Aumentar_Puntoslvl2() {
         Puntajelvl2++;
-        document.getElementById("Puntajelvl2").innerHTML = Puntajelvl2 + " / 20"
-        if (Puntajelvl2 == 20) {
-            Puntajelvl2 = 0
+        document.getElementById("Puntajelvl2").innerHTML = Puntajelvl2 + " / 20" //MEJORA
+        if (Puntajelvl2 == 20) { //MEJORA
+            //Puntajelvl2 = 0
             Tiempolvl2 = 61
 
             document.getElementById("Tiempolvl2").innerHTML = 60
-            document.getElementById("Puntajelvl2").innerHTML = 0 + "&nbsp;/&nbsp;" + 20
+            document.getElementById("Puntajelvl2").innerHTML = Puntajelvl2 + "&nbsp;/&nbsp;" + 20 //MEJORA
             document.getElementById("Fondo_Ciberpunk").pause()
             document.getElementById("Triunfo").play()
             document.getElementById("NEXT").addEventListener('click', Habilitar_Siguienten_LVL)
@@ -104,7 +101,7 @@ function JUEGOlvl2() {
     }
 
     Activador_iniciallvl2 = setTimeout(Metiorito_Direccionlvl2, 3500)//PRIMERO VA A SER EJECUTADO A LOS DOS PRIMEROS SEGUNDOS
-    Reanudar_trayectorialvl2 = setInterval(Metiorito_Direccionlvl2, 4000)//LUEGO SE VA A LLAMAR A LOS METIORITOS CADA 2,4 SEGUNDOS
+    Reanudar_trayectorialvl2 = setInterval(Metiorito_Direccionlvl2, 2030)//LUEGO SE VA A LLAMAR A LOS METIORITOS CADA 2,4 SEGUNDOS
 
 
     //ESTA FUNCION DIRIGE AL PRIMER METIORITO 2 A LA TIERRA         
@@ -117,7 +114,7 @@ function JUEGOlvl2() {
     }
 
     Activador_inicial2lvl2 = setTimeout(Metiorito_Direccion2lvl2, 3000)//PRIMERO VA A SER EJECUTADO A LOS DOS PRIMEROS SEGUNDOS
-    Reanudar_trayectoria2lvl2 = setInterval(Metiorito_Direccion2lvl2, 4000)//LUEGO SE VA A LLAMAR A LOS METIORITOS CADA 2,3 SEGUNDOS
+    Reanudar_trayectoria2lvl2 = setInterval(Metiorito_Direccion2lvl2, 2750)//LUEGO SE VA A LLAMAR A LOS METIORITOS CADA 2,3 SEGUNDOS
 
     //ESTA FUNCION DIRIGE AL PRIMER METIORITO 3 A LA TIERRA
     function Metiorito_Direccion3lvl2() {
@@ -129,7 +126,7 @@ function JUEGOlvl2() {
     }
 
     Activador_inicial3lvl2 = setTimeout(Metiorito_Direccion3lvl2, 2200)//PRIMERO VA A SER EJECUTADO A LOS DOS PRIMEROS SEGUNDOS
-    Reanudar_trayectoria3lvl2 = setInterval(Metiorito_Direccion3lvl2, 4000)//LUEGO SE VA A LLAMAR A LOS METIORITOS CADA 2,3 SEGUNDOS
+    Reanudar_trayectoria3lvl2 = setInterval(Metiorito_Direccion3lvl2, 2470)//LUEGO SE VA A LLAMAR A LOS METIORITOS CADA 2,3 SEGUNDOS
 
 
 
@@ -145,7 +142,7 @@ function JUEGOlvl2() {
         Alturalvl2 = Math.round(Math.random() * 450)
         document.getElementById("Meteioritolvl2").style.left = Distancialvl2 + "px"
         document.getElementById("Meteioritolvl2").style.top = Alturalvl2 + "px"
-        document.getElementById("Meteioritolvl2").style.transition = "3s"
+        document.getElementById("Meteioritolvl2").style.transition = "1.8s"
     }
 
 
@@ -156,7 +153,7 @@ function JUEGOlvl2() {
         Alturalvl2 = Math.round(Math.random() * 450)
         document.getElementById("Meteiorito2lvl2").style.left = Distancialvl2 + "px"
         document.getElementById("Meteiorito2lvl2").style.top = Alturalvl2 + "px"
-        document.getElementById("Meteiorito2lvl2").style.transition = "4s"
+        document.getElementById("Meteiorito2lvl2").style.transition = "1.8s"
     }
 
     //ESTA ES LA FUNCION QUE EXPULSA AL METEORITO 3 DE MANERA ALEATORIA FUERA DEL MAPA
@@ -166,47 +163,131 @@ function JUEGOlvl2() {
         Alturalvl2 = Math.round(Math.random() * 450)
         document.getElementById("Meteiorito3lvl2").style.left = Distancialvl2 + "px"
         document.getElementById("Meteiorito3lvl2").style.top = Alturalvl2 + "px"
-        document.getElementById("Meteiorito3lvl2").style.transition = "5s"
+        document.getElementById("Meteiorito3lvl2").style.transition = "1.8s"
     }
 
 
 
 
 
+    //MEJORA
     //ESTA FUNCION SE ENCARGA DE ALERTARTE UNA VEZ EL METIORITO CRUZE LA LINEA CON UN PERDISTE
     //TAMBIEN RESETEA LOS VALORES Y LLEVA A LOS METIORITOS FUERA DEL MAPA DE MANERA INSTANTANEA
     function perdistelvl2() {
-        if (Activolvl2 == 2) return
+        if (EnDerrotalvl2) return //NO SEGUIMOS CHEQUEANDO SI YA ESTAMOS EN DERROTA
+
         if ((document.getElementById("Meteioritolvl2").offsetLeft > 630) ||
             (document.getElementById("Meteiorito2lvl2").offsetLeft > 630) ||
             (document.getElementById("Meteiorito3lvl2").offsetLeft > 630)) {
-            document.getElementById("Perdiste_sound").play()
-
-            alert("YA ES DEMASIADO TARDE, LOS METEORITOS DESTRUYERON GRAN PARTE DEL CONTINENTE Y LO MEJOR ES ESPERAR LO PEOR")
-
-
-            document.getElementById("Meteioritolvl2").style.left = "-70%"
-            document.getElementById("Meteioritolvl2").style.transition = "0s"
-
-            document.getElementById("Meteiorito2lvl2").style.left = "-70%"
-            document.getElementById("Meteiorito2lvl2").style.transition = "0s"
-
-            document.getElementById("Meteiorito3lvl2").style.left = "-70%"
-            document.getElementById("Meteiorito3lvl2").style.transition = "0s"
-
-            Tiempolvl2 = 61
-            Puntajelvl2 = 0
-        }
-
-        else {
-            document.getElementById("Meteioritolvl2").style.transition = "5s"
-            document.getElementById("Meteiorito2lvl2").style.transition = "5s"
-            document.getElementById("Meteiorito3lvl2").style.transition = "5s"
+            Perdiste_Alertalvl2('LOS METEORITOS DESTRUYERON GRAN PARTE DEL CONTINENTE.<br>LO MEJOR ES ESPERAR LO PEOR')
+        } else {
+            document.getElementById("Meteioritolvl2").style.transition = "2s"
+            document.getElementById("Meteiorito2lvl2").style.transition = "2s"
+            document.getElementById("Meteiorito3lvl2").style.transition = "2s"
         }
     }
 
-    setInterval(perdistelvl2, 1)//LE COLOCAMOS UNO PARA QUE SIEMPRE SE ESTE EJECUTANDO, DADO A 
+    //MEJORA
+    //DETIENE TODO EL JUEGO Y MUESTRA LA ALERTA DE DERROTA
+    Perdiste_Alertalvl2 = function (mensaje) {
+        if (EnDerrotalvl2) return //SI YA ESTAMOS EN PANTALLA DE DERROTA, IGNORAMOS
+        EnDerrotalvl2 = true
+
+        document.getElementById("Perdiste_sound").play()
+        document.getElementById("Fondo_Ciberpunk").pause()
+
+        //DETENEMOS TIEMPO Y TRAYECTORIAS
+        clearInterval(Restar_Tiempolvl2)
+        clearInterval(Reanudar_trayectorialvl2)
+        clearInterval(Reanudar_trayectoria2lvl2)
+        clearInterval(Reanudar_trayectoria3lvl2)
+        clearTimeout(Activador_iniciallvl2)
+        clearTimeout(Activador_inicial2lvl2)
+        clearTimeout(Activador_inicial3lvl2)
+
+        //SACAMOS LOS METEORITOS DE LA PANTALLA
+        document.getElementById("Meteioritolvl2").style.transition = "0s"
+        document.getElementById("Meteioritolvl2").style.left = "-70%"
+        document.getElementById("Meteiorito2lvl2").style.transition = "0s"
+        document.getElementById("Meteiorito2lvl2").style.left = "-70%"
+        document.getElementById("Meteiorito3lvl2").style.transition = "0s"
+        document.getElementById("Meteiorito3lvl2").style.left = "-70%"
+
+        Swal.fire({
+            title: 'MISIÓN FALLIDA <br><br> <img src="IMG/Chems.gif" width="120px">',
+            html: mensaje,
+            icon: 'error',
+            confirmButtonText: 'INTENTAR DE NUEVO',
+            width: '50%',
+            background: 'radial-gradient(circle at center, rgba(255,40,40,0.35), rgba(20,0,0,0.95))',
+            color: '#fff',
+            allowOutsideClick: false,
+            allowEscapeKey: false,
+            allowEnterKey: false,
+            preConfirm: () => { //MEJORA: bloquea el botón apenas se confirma una vez
+                Swal.getConfirmButton().disabled = true
+            }
+        }).then(function () {
+            Reiniciar_Nivellvl2()
+        })
+    }
+
+    //MEJORA
+    //CONTEO 3,2,1 Y REINICIO DE TIEMPO/PUNTAJE/METEORITOS
+    Reiniciar_Nivellvl2 = function () {
+        clearInterval(Conteo_Reinicio_Intervallvl2); //MEJORA
+
+        Tiempolvl2 = 61
+        Puntajelvl2 = 0
+        document.getElementById("Tiempolvl2").innerHTML = 60
+        document.getElementById("Puntajelvl2").innerHTML = "0 / 20"
+
+        document.getElementById("Startlvl2").style.display = "flex" 
+        document.getElementById("Playlvl2").style.pointerEvents = "none" //MEJORA: evita que se pueda re-clickear "JUGAR"
+        document.getElementById("Contenedor_contadorlvl2").style.display = "table"
+
+        conteo_reiniciolvl2 = 3
+        document.getElementById("RGBlvl2").innerHTML = conteo_reiniciolvl2
+
+        Conteo_Reinicio_Intervallvl2 = setInterval(function () {
+            if (conteo_reiniciolvl2 <= 0) { //MEJORA: seguro extra, no debería pasar pero corta cualquier resto
+                clearInterval(Conteo_Reinicio_Intervallvl2)
+                return
+            }
+            conteo_reiniciolvl2--
+
+            if (conteo_reiniciolvl2 >= 1) {
+                document.getElementById("RGBlvl2").innerHTML = conteo_reiniciolvl2
+            } else {
+                clearInterval(Conteo_Reinicio_Intervallvl2)
+                document.getElementById("Startlvl2").style.display = "none"
+                document.getElementById("Playlvl2").style.pointerEvents = "auto" //MEJORA: restaura por si se vuelve a mostrar Startlvl2 en otro contexto
+                document.getElementById("Contenedor_contadorlvl2").style.display = "none"
+
+                document.getElementById("Fondo_Ciberpunk").play()
+
+                //REACTIVAMOS TIEMPO Y TRAYECTORIAS
+                Restar_Tiempolvl2 = setInterval(Tiempo_Disminurlvl2, 1000)
+
+                Activador_iniciallvl2 = setTimeout(Metiorito_Direccionlvl2, 500)
+                Reanudar_trayectorialvl2 = setInterval(Metiorito_Direccionlvl2, 2030)
+
+                Activador_inicial2lvl2 = setTimeout(Metiorito_Direccion2lvl2, 900)
+                Reanudar_trayectoria2lvl2 = setInterval(Metiorito_Direccion2lvl2, 2750)
+
+                Activador_inicial3lvl2 = setTimeout(Metiorito_Direccion3lvl2, 1300)
+                Reanudar_trayectoria3lvl2 = setInterval(Metiorito_Direccion3lvl2, 2470)
+
+                EnDerrotalvl2 = false //RECIEN AQUI SE HABILITA DE NUEVO LA DERROTA
+            }
+        }, 1000)
+    }
+
+    setInterval(perdistelvl2, 1)
+    //LE COLOCAMOS UNO PARA QUE SIEMPRE SE ESTE EJECUTANDO, DADO A 
     //QUE NO SABEMOS CUANDO EL METIORITO VA A SUPERAR EL LIMITE
+
+
 }
 
 
@@ -217,12 +298,16 @@ Conteolvl2 = 4 //ESTE ES EL CONTEO DE LA CUENTA REGRESIVA QUE SE DA DESPUEZ DE P
 
 //ESTA FUNCION EJECUTA UN CONJUNTO DE ACCIONES AL PRESIONAR JUGAR
 function PLAYlvl2() {
+    if (JuegoYaIniciadolvl2) return //AGREGADO
+    JuegoYaIniciadolvl2 = true //AGREGADO
+
     document.getElementById("Fondo_Ciberpunk").play()
     //MUEVE EL TITULO FUERA DEL CONTENEDOR UNA VEZ DE CLICK A JUGAR
     document.getElementById("Texolvl2").style.left = "-900px"
     //MUEVE AL BOTON PLAY TRANS PRESIONAR PRESIONAR AL MISMO BOTON
     document.getElementById("Playlvl2").style.left = "-900px"
     document.getElementById("Dificultad").style.left = "-900px"
+    document.getElementById("NivelIndicadorlvl2").style.left = "-900px";
     //ESTA FUNCION CONTIENE AL JUEGO COMO TAL
     function ARRACARlvl2() {
         JUEGOlvl2()
@@ -235,6 +320,7 @@ function PLAYlvl2() {
             Conteolvl2--;
             document.getElementById("RGBlvl2").innerHTML = Conteolvl2
             if (Conteolvl2 == -1) {
+                clearInterval(Conteo_inicial_intervallvl2) //MEJORA: detiene el conteo inicial para que no siga corriendo para siempre
                 document.getElementById("Contenedor_contadorlvl2").style.display = "none"
                 function Borrarlvl2() {
                     document.getElementById("Startlvl2").style.display = "none"
@@ -244,7 +330,7 @@ function PLAYlvl2() {
                 setTimeout(Borrarlvl2, 500)
             }
         }
-        setInterval(Cuenta_rglvl2, 1000)
+        Conteo_inicial_intervallvl2 = setInterval(Cuenta_rglvl2, 1000) //MEJORA
     }
 
     setTimeout(ESPERARlvl2, 350)
@@ -293,7 +379,7 @@ function DETENER_JUEGOlvl2() {
                 if (Tiempolvl2 == 0) {
                     Tiempolvl2 = 61
                     Puntajelvl2 = 0
-                    alert("Lo lamento perdiste")
+                    Perdiste_Alertalvl2("SE ACABÓ EL TIEMPO. INTÉNTALO DE NUEVO")
                 }
             }
 
@@ -301,15 +387,15 @@ function DETENER_JUEGOlvl2() {
 
             document.getElementById("Meteioritolvl2").style.left = Distancia1lvl2 + "%"
             document.getElementById("Meteioritolvl2").style.top = Altura1lvl2 + "px"
-            document.getElementById("Meteioritolvl2").style.transition = "5s"
+            document.getElementById("Meteioritolvl2").style.transition = "2s"
 
             document.getElementById("Meteiorito2lvl2").style.left = Distancia2lvl2 + "%"
             document.getElementById("Meteiorito2lvl2").style.top = Altura2lvl2 + "px"
-            document.getElementById("Meteiorito2lvl2").style.transition = "5s"
+            document.getElementById("Meteiorito2lvl2").style.transition = "2s"
 
             document.getElementById("Meteiorito3lvl2").style.left = Distancia3lvl2 + "%"
             document.getElementById("Meteiorito3lvl2").style.top = Altura3lvl2 + "px"
-            document.getElementById("Meteiorito3lvl2").style.transition = "5s"
+            document.getElementById("Meteiorito3lvl2").style.transition = "2s"
 
             function Metiorito_Direccionlvl2() {
                 Distancia1lvl2 = 80
@@ -332,7 +418,7 @@ function DETENER_JUEGOlvl2() {
             }
 
             setTimeout(Metiorito_Direccion2lvl2, 1)
-            Reanudar_trayectoria2lvl2 = setInterval(Metiorito_Direccion2lvl2, 2430)
+            Reanudar_trayectoria2lvl2 = setInterval(Metiorito_Direccion2lvl2, 2050)
 
 
             function Metiorito_Direccion3lvl2() {
@@ -350,3 +436,4 @@ function DETENER_JUEGOlvl2() {
         }
     }
 } //CAMBIAMOS EL VALOR DE NUEVO A 1 PARA QUE AL SIGUIENTE CLICK SE EJECUTE EL PAUSE  S 
+

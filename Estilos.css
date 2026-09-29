@@ -1115,19 +1115,55 @@ html body {
 .Contenedorlvl2 {
     width: 900px;
     height: 500px;
-    border: 5px dashed rgb(46, 86, 218);
-    background: url(IMG/Fondo.jpg) no-repeat 50% 50%;
-    background-size: cover;
     position: relative;
     top: 4%;
     overflow: hidden;
+    border: 3px solid rgb(0, 119, 255);
+    background: url(IMG/choque.gif) no-repeat 50% 50%;
+    background-size: cover;
+    box-shadow:
+        0 0 8px rgba(0, 119, 255, 0.9),
+        0 0 20px rgba(0, 119, 255, 0.5),
+        inset 0 0 20px rgba(0, 119, 255, 0.25);
+    box-sizing: border-box;
+}
+.Contenedorlvl2::before,
+.Contenedorlvl2::after {
+    content: "";
+    position: absolute;
+    width: 35px;
+    height: 35px;
+    z-index: 200000;
+    pointer-events: none;
+}
+.Contenedorlvl2::before {
+    top: 5px;
+    left: 5px;
+    border-top: 3px solid #4db8ff;
+    border-left: 3px solid #4db8ff;
+    box-shadow:
+        -3px -3px 10px rgba(77, 184, 255, 0.5);
+}
+.Contenedorlvl2::after {
+    bottom: 5px;
+    right: 5px;
+    border-bottom: 3px solid #4db8ff;
+    border-right: 3px solid #4db8ff;
+    box-shadow:
+        3px 3px 10px rgba(77, 184, 255, 0.5);
 }
 
-/*Pantalla start del inicio del juego*/
+/*MEJORA Pantalla start del inicio del juego*/
 .Startlvl2 {
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.582);
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(0, 119, 255, 0.12),
+            rgba(0, 0, 0, 0.75)
+        ),
+        rgba(0, 0, 0, 0.582);
     position: absolute;
     top: 0%;
     z-index: 100000000000;
@@ -1138,7 +1174,74 @@ html body {
     color: white;
     text-align: center;
 }
-
+.NivelIndicadorlvl2 {
+    padding: 8px 18px;
+    border: 2px solid rgb(0, 119, 255);
+    background: rgba(0, 119, 255, 0.15);
+    color: #4db8ff;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 15px;
+    text-shadow:
+        0 0 5px #4db8ff,
+        0 0 12px rgba(77, 184, 255, 0.7);
+    box-shadow:
+        0 0 10px rgba(0, 119, 255, 0.4);
+    margin-bottom: 15px;
+    position: relative;
+    left: 0;
+    transition: 2s;
+}
+/*TITULO CENTRAL DE START*/
+.Texolvl2 {
+    font-size: 36px;
+    position: relative;
+    left: 0;
+    top: 0;
+    transition: 2s;
+    font-family: 'Press Start 2P', cursive;
+    line-height: 55px;
+    margin: 0 0 25px 0;
+    text-shadow:
+        0 0 5px white,
+        0 0 12px rgba(0, 119, 255, 0.8);
+}
+#Dificultad {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    position: absolute;
+    top: 0%;
+    left: 0px;
+    transform: translateY(50px);
+    transition: 2s;
+    align-items: center;
+    text-shadow: 0 0 8px rgba(0, 119, 255, 0.6);
+}
+#Dificultad h1 {
+    margin: 0;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 18px;
+    line-height: 1.6;
+}
+.DificultadTexto {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Press Start 2P', cursive;
+}
+.DificultadTexto span {
+    font-size: 12px;
+    color: #aaa;
+}
+#Dificultad strong {
+    color: #4db8ff;
+    font-size: 20px;
+    text-shadow:
+        0 0 5px #4db8ff,
+        0 0 10px rgba(77, 184, 255, 0.8),
+        0 0 20px rgba(0, 119, 255, 0.5);
+}
 /*Boton de la pantalla start*/
 .Playlvl2 {
     background: rgb(0, 119, 255);
@@ -1152,29 +1255,19 @@ html body {
     cursor: pointer;
     position: relative;
     transition: 2s;
-    margin-top: -2%;
+    margin-top: 4%;
     font-family: 'Press Start 2P', cursive;
-}
-
-/*TITULO CENTRAL DE START*/
-.Texolvl2 {
-    font-size: 36px;
     position: relative;
-    left: 0px;
-    top: -15%;
-    transition: 2s;
-    font-family: 'Press Start 2P', cursive;
-    line-height: 70px;
+    box-shadow:
+        0 0 10px rgba(0, 119, 255, 0.6),
+        0 0 20px rgba(0, 119, 255, 0.25);
+    border: 2px solid rgba(100, 200, 255, 0.8);
 }
-
-#Dificultad {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    position: absolute;
-    top: 45%;
-    left: 0px;
-    transition: 2s;
+.Playlvl2:hover {
+    background: rgb(0, 145, 255);
+    box-shadow:
+        0 0 15px rgba(0, 119, 255, 0.9),
+        0 0 30px rgba(0, 119, 255, 0.5);
 }
 
 #Contenedor_contadorlvl2 {
@@ -1182,7 +1275,6 @@ html body {
     display: table;
     position: absolute;
 }
-
 /*ESTILOS DE LOS NUMEROS DEL COTEO EN START*/
 #RGBlvl2 {
     font-size: 220px;
@@ -1204,33 +1296,41 @@ html body {
     display: none;
 }
 
+/*MEJORA*/
 .GanastePantallaLvL2 {
     position: absolute;
     width: 100%;
     height: 100%;
-    background: rgba(47, 255, 57, 0.63);
+    background:
+        radial-gradient(circle at center, rgba(40, 255, 90, 0.35), rgba(0, 0, 0, 0.92)),
+        rgba(0, 0, 0, 0.75);
     z-index: 900;
     top: 0%;
-    display: flex;
+    display: none;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    display: none;
+    text-align: center;
+    box-sizing: border-box;
+    padding: 30px;
 }
-
 .GanastePantallaLvL2 h1 {
     font-family: 'Press Start 2P', cursive;
-    color: rgb(10, 90, 16);
+    color: #39ff6a;
     text-align: center;
     font-size: 2rem;
+    text-shadow:
+        0 0 5px #39ff6a,
+        0 0 15px #39ff6a,
+        0 0 30px rgba(57, 255, 106, 0.8);
 }
-
 .GanastePantallaLvL2 h3 {
     text-align: center;
     padding-left: 10%;
     padding-right: 10%;
-    color: rgb(0, 0, 0);
+    color: white;
     font-family: 'Press Start 2P', cursive;
+    line-height: 1.8;
 }
 
 
@@ -1298,9 +1398,17 @@ html body {
 /*CABEZARA DENTRO DEL JUEGO*/
 .Cabezeralvl2 {
     height: 70px;
-    border: 5px dashed rgb(0, 119, 255);
-    background: rgba(255, 255, 255, 0.363);
-    border-bottom: none;
+    border-bottom: 2px solid rgb(0, 119, 255);
+    background:
+        linear-gradient(
+            90deg,
+            rgba(0, 119, 255, 0.18),
+            rgba(0, 0, 0, 0.65),
+            rgba(0, 119, 255, 0.18)
+        );
+    box-shadow:
+        0 0 10px rgba(0, 119, 255, 0.4),
+        inset 0 -5px 15px rgba(0, 119, 255, 0.15);
     display: flex;
     align-items: center;
     position: relative;
@@ -1313,9 +1421,12 @@ html body {
     flex-direction: column;
     width: 14%;
     height: 70%;
-    color: black;
+    color: white;
     font-size: 13px;
     line-height: 1vh;
+
+    text-shadow:
+        0 0 5px rgba(77, 184, 255, 0.8);
 }
 
 /*ESTILOS DEL SPAN Y DEL TEXTO DE PUNTAJE*/
@@ -1326,18 +1437,24 @@ html body {
     margin-top: 2%;
     width: 14%;
     height: 100%;
-    color: black;
+    color: white;
     font-size: 13px;
-    line-height: 7px;
+    line-height: 1vh;
+    
+    text-shadow:
+        0 0 5px rgba(77, 184, 255, 0.8);
 }
 
 /*ESTILOS DEL BOTON DE PAUSE*/
-
 .Pauselvl2 {
     width: 20%;
     height: 70%;
     font-size: 14px;
-    background: rgb(0, 119, 255);
+    background: rgba(0, 119, 255, 0.75);
+    border: 2px solid #4db8ff;
+    box-shadow:
+        0 0 8px rgba(0, 119, 255, 0.7),
+        inset 0 0 8px rgba(77, 184, 255, 0.25);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1345,22 +1462,14 @@ html body {
     cursor: pointer;
     position: relative;
     left: 50%;
-    transition: transform 0.2s ease,
-        filter 0.2s ease,
-        box-shadow 0.2s ease;
+    font-family: 'Press Start 2P', cursive;
+    transition: 0.2s;
 }
-
 .Pauselvl2:hover {
-    transform: scale(1.06);
-    filter: brightness(1.2);
+    background: rgb(0, 145, 255);
     box-shadow:
-        0 0 8px rgba(0, 183, 255, 0.9),
-        0 0 18px rgba(0, 183, 255, 0.75),
-        0 0 30px rgba(0, 183, 255, 0.55);
-}
-
-.Pauselvl2:active {
-    transform: scale(0.97);
+        0 0 12px rgba(0, 119, 255, 0.9),
+        0 0 25px rgba(0, 119, 255, 0.5);
 }
 
 /*MENSAJE DENTRO DE PAUSE*/
@@ -1380,8 +1489,6 @@ html body {
 
 .Aumentarpuntoslvl2 {
     color: black;
-
-
 }
 
 /*TERCER NIVEL ----------------------------------------------------------------------------------------*/
@@ -1685,15 +1792,43 @@ html body {
     width: 20%;
     height: 70%;
     font-size: 14px;
-    background: red;
+    background: rgba(255, 0, 0, 0.15);
+    border: 2px solid red;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
+    color: #ff4d4d;
     cursor: pointer;
     position: relative;
     top: 15%;
     left: 50%;
+    font-family: 'Press Start 2P', cursive;
+    text-shadow:
+        0 0 5px #ff4d4d,
+        0 0 12px rgba(255, 0, 0, 0.7);
+    box-shadow:
+        0 0 10px rgba(255, 0, 0, 0.4);
+    transition: 0.3s;
+}
+.Pauselvl3.activo {
+    background: rgba(0, 255, 0, 0.15);
+    border-color: limegreen;
+    color: #66ff66;
+
+    text-shadow:
+        0 0 5px #66ff66,
+        0 0 12px rgba(0, 255, 0, 0.7);
+
+    box-shadow:
+        0 0 10px rgba(0, 255, 0, 0.5);
+}
+.Pauselvl3:hover {
+    background: darkred;
+}
+.Pauselvl3.activo:hover {
+    background: rgba(0, 255, 0, 0.35);
+    box-shadow:
+        0 0 15px rgba(0, 255, 0, 0.8);
 }
 
 /*MENSAJE DENTRO DE PAUSE*/
@@ -2599,6 +2734,7 @@ body {
 .swal2-container {
     backdrop-filter: blur(7px);
     -webkit-backdrop-filter: blur(7px);
+    z-index: 999999 !important;
 }
 
 .swal2-popup {

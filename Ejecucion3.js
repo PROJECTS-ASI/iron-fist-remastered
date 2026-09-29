@@ -55,7 +55,7 @@ function JUEGOlvl3() {
             setTimeout(Contactos, 15000)
 
             
-            document.getElementById("Fondo_Ciberpunk").pause()
+            document.getElementById("Music_level3").pause()
             document.getElementById("Triunfo").play()
 
             function Ganaste_Pantallalvl3(){
@@ -238,7 +238,7 @@ function JUEGOlvl3() {
             document.getElementById("Meteorito4lvl3").style.transition = "0s"
             setTimeout(Meteorito_Direccion4lvl3, 2900)
 
-            Tiempolvl3 = 51
+            //Tiempolvl3 = 51
             Puntajelvl3 = 0
         }
         else {
@@ -265,7 +265,7 @@ Conteolvl3 = 4
 
 //ESTA FUNCION EJECUTA UN CONJUNTO DE ACCIONES AL PRESIONAR JUGAR
 function PLAYlvl3() {
-    document.getElementById("Fondo_Ciberpunk").play()
+    document.getElementById("Music_level3").play()
     //MUEVE EL TITULO FUERA DEL CONTENEDOR UNA VEZ DE CLICK A JUGAR
     document.getElementById("Textolvl3").style.left = "-900px"
     //MUEVE AL BOTON PLAY TRANS PRESIONAR PRESIONAR AL MISMO BOTON
@@ -312,7 +312,7 @@ function DETENER_JUEGOlvl3() {
             document.getElementById("Pausa_Pantallalvl3").style.display = "table"
             clearInterval(Restar_Tiempolvl3) //BORRAMOS LA FUNCION DE TIEMPO
             document.getElementById("Tiempolvl3").innerHTML = Tiempolvl3
-            document.getElementById("Fondo_Ciberpunk").pause()
+            document.getElementById("Music_level3").pause()
             function Meteorito_detenerlvl3() {
                 clearInterval(Intervalo_Dirlvl3)
                 clearInterval(Intervalo_Dir2lvl3)
@@ -332,12 +332,14 @@ function DETENER_JUEGOlvl3() {
 
             Pause_offlvl3 = setInterval(Meteorito_detenerlvl3, 0.01) //LE ASEGNAMOS UNA ID, PARA BORRALO UNA VEZ SE DESPAUSEE
             Activolvl3 = 2
+            document.querySelector("#Pauselvl3 h3").innerHTML = "REANUDAR";
+            document.getElementById("Pauselvl3").classList.add("activo");
         }
         //CAMBIAMOS EL VALOR PARA QUE AL VOLVER A DARLE CLICK EJECUTE LA CONDICIONAL DE REANUDAR
         else { //LA FUNCION DE REANUDAR
             document.getElementById("Pausa_Pantallalvl3").style.display = "none"
             //BORRAMOS LA FUNCION, PARA QUE EL REANUDAR PUEDA EJECUTARSE DE NUEVO
-            document.getElementById("Fondo_Ciberpunk").play()
+            document.getElementById("Music_level3").play()
             clearInterval(Pause_offlvl3)
 
             function Tiempo_Disminurlvl3() { //VOLVEMOS A CREAR LA FUNCION DE TIEMPO PARA QUE REANUDE EL CONTEO
@@ -424,6 +426,8 @@ function DETENER_JUEGOlvl3() {
             //BORRAMOS LA FUNCION, PARA QUE EL REANUDAR PUEDA EJECUTARSE DE NUEVO
 
             Activolvl3 = 1
+            document.querySelector("#Pauselvl3 h3").innerHTML = "PAUSAR";
+            document.getElementById("Pauselvl3").classList.remove("activo");
         }
     }
 } //CAMBIAMOS EL VALOR DE NUEVO A 1 PARA QUE AL SIGUIENTE CLICK SE EJECUTE EL PAUSE  S

@@ -21,7 +21,7 @@ function punto(e){if(!iniciado||pausado||ganado)return;const id=e.currentTarget.
 
 function perder(motivo){
     if(!iniciado||ganado)return;
-    iniciado=false;pausado=false;limpiar();$("Fondo_Ciberpunk")?.pause();ids.forEach(ocultar);
+    iniciado=false;pausado=false;limpiar();$("Music_level3")?.pause();ids.forEach(ocultar);
     const s=$("Perdiste_sound");if(s){s.currentTime=0;s.play().catch(()=>{});}
     const txt=motivo||"Un meteorito cruzó la línea de seguridad y alcanzó la Tierra.";
     if(typeof window.mostrarDerrotaGeneral==="function")window.mostrarDerrotaGeneral(txt);
@@ -67,7 +67,7 @@ function iniciar(){
     const victoria=$("GanastePantallaLvL3");
     if(victoria)victoria.style.display="none";
 
-    const musica=$("Fondo_Ciberpunk");
+    const musica=$("Music_level3");
     if(musica){
         musica.currentTime=0;
         musica.play().catch(()=>{});
@@ -139,7 +139,7 @@ function ganar(){
 
     limpiar();
 
-    const musica=$("Fondo_Ciberpunk");
+    const musica=$("Music_level3");
     if(musica)musica.pause();
 
     ids.forEach(id=>{
@@ -299,7 +299,7 @@ function reanudarMeteorito(id){
    PAUSA
 ========================================================= */
 
-function pausar(){if(!iniciado||ganado)return;pausado=!pausado;if(pausado){ids.forEach(guardarPosicionPausa);}else{ids.forEach(id=>{if(vuelos[id])reanudarMeteorito(id);else lanzar(id);});}const b=$("Pauselvl3"),p=$("Pausa_Pantallalvl3"),m=$("Fondo_Ciberpunk");if(b){const t=b.querySelector("h3");if(t)t.textContent=pausado?"REANUDAR":"PAUSAR";b.classList.toggle("Pauselvl3_Activo",pausado);}if(p)p.style.display=pausado?"table":"none";if(m){if(pausado)m.pause();else m.play().catch(()=>{});}}
+function pausar(){if(!iniciado||ganado)return;pausado=!pausado;if(pausado){ids.forEach(guardarPosicionPausa);}else{ids.forEach(id=>{if(vuelos[id])reanudarMeteorito(id);else lanzar(id);});}const b=$("Pauselvl3"),p=$("Pausa_Pantallalvl3"),m=$("Music_level3");if(b){const t=b.querySelector("h3");if(t)t.textContent=pausado?"REANUDAR":"PAUSAR";b.classList.toggle("Pauselvl3_Activo",pausado);}if(p)p.style.display=pausado?"table":"none";if(m){if(pausado)m.pause();else m.play().catch(()=>{});}}
 
 
 /* =========================================================

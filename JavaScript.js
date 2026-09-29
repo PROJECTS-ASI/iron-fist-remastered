@@ -1,16 +1,16 @@
 Swal.fire({
     title : '¿Preparado para salvar el mundo? <br><br> <img src="IMG/planeta_tierra.png" width = "120px"><br>',
-    html: 'IRON FIST es un juego de reflejos por niveles. Supera cada desafío, consigue los puntos necesarios y protege la Tierra de los meteoritos.',
-    icon: 'info',
+    html: 'IRON FIST, es un juego que mejorara tus reflejos a medida que pases de nivel, retandote cada vez mas a medida que avances y desbloqueando grandes logros al final de cada nivel, esperamos te diviertas y disfrutes de este gran juego   ',
+    icon: 'sucess',
     confirmButtonText: 'ESTOY PREPARADO',
     width: '50%',
-    heightAuto: false,
-    timer: undefined,
+    height: '80%',
+    timer: 100000,
     
     
     timerProgressbar: true,
     /*Funcion de cerrar la alerta*/
-    allowOutsideClick: false,
+    allowOutsideClick: true,
     allowEscapeKey: false,
     allowEnterkey: false,
     stopKeydownPropagation: false,
@@ -22,72 +22,64 @@ Tiempo = 71 //VARIBLE DE INICIO TIEMPO
 Puntaje = 0 //VARIABLE DE INICIO PUNTOS
 
 
-// CAMBIO HECHO DIRECTAMENTE EN MAIN PARA PROBAR MERGE
+
 //FUNCION DE NARRACIONES
 
 Narracion = 1
-document.getElementById("Contenedor_narracion").addEventListener('click', Iniciar_narracion)
+document.getElementById("Contenedor_narracion").addEventListener('click',  Iniciar_narracion)
 
 function Iniciar_narracion(){
-    var audio = document.getElementById("narracion")
-    var texto = document.getElementById("Texto_narracion")
     if(Narracion == 1){
-        audio.play()
-        document.getElementById("VOLUMEN").style.display = "none"
-        document.getElementById("PAUSE").style.display = "inline-block"
-        texto.textContent = "PAUSAR NARRACIÓN"
-        Narracion = 2
-    } else {
-        audio.pause()
-        document.getElementById("VOLUMEN").style.display = "inline-block"
+    document.getElementById("narracion").play()
+    document.getElementById("VOLUMEN").style.display = "none"
+    document.getElementById("PAUSE").style.display = "table"
+    Narracion = 2}
+    else{
+        document.getElementById("narracion").pause()
+        document.getElementById("VOLUMEN").style.display = "table"
         document.getElementById("PAUSE").style.display = "none"
-        texto.textContent = "ESCUCHAR HISTORIA"
         Narracion = 1
     }
 }
-
-document.getElementById("narracion").addEventListener("ended", function(){
-    document.getElementById("VOLUMEN").style.display = "inline-block"
-    document.getElementById("PAUSE").style.display = "none"
-    document.getElementById("Texto_narracion").textContent = "ESCUCHAR HISTORIA"
-    Narracion = 1
-})
 
 
 
 
 Graficos = 1 //Este es el medidor de graficos
 
-function AlternarFondos(){
-    document.getElementById("Selector_fondos").classList.toggle("abierto")
-}
-
-function CambiarFondo(ruta){
-    document.getElementById("Fondo").style.backgroundImage = "url('" + ruta + "')"
-    document.getElementById("Fondo").style.backgroundAttachment = "fixed"
-    document.getElementById("Fondo").style.backgroundRepeat = "no-repeat"
-    document.getElementById("Fondo").style.backgroundSize = "cover"
-    document.getElementById("Selector_fondos").classList.remove("abierto")
-}
-
+//En esta funcion cambio de fondo al presionar el CHEKBOX, para graurar los graficos dentro del juego
 function Graficos_fondo(){
-    AlternarFondos()
+Contenedor_RQ = document.getElementById("Contenedor_RC")
+if(Graficos == 1){
+document.getElementById("Recursos").style.marginLeft = "60%"
+document.getElementById("Fondo").style.background = "url(IMG/Fondo_Espacio2.jpg)"
+document.getElementById("Fondo").style.backgroundAttachment = "fixed"
+document.getElementById("Fondo").style.backgroundRepeat = "no-repeat"
+document.getElementById("Fondo").style.backgroundSize = "100% 120%"
+Graficos = 2}
+else{
+document.getElementById("Recursos").style.marginLeft = "0%"
+document.getElementById("Fondo").style.backgroundImage = "url(IMG/Fondo_Espacio.gif) "
+Graficos = 1
 }
+}
+
+
+
 
 
 
 //CONTENEDOR QUE CONTEIENE TOO EL JUEGO
 //DE POR SI ESTA FUNCION NO SE EJECUTA HASTA QUE SE LA LLAMA, MAS ADELANTE LA LLAMAREMOS
 //PARA QUE EL JUEGO INICIE UNA VEZ SE PRESIONE JUGAR
-let Nivel1_Ganado = false;
 function JUEGO(){
 
     function Tiempo_Disminur(){ //FUNCION QUE REDUCE EL TIEMPO Y RESETEAL EL RESULTADO UNA VEZ LLEGUE A 0
         Tiempo--;
         document.getElementById("Tiempo").innerHTML = Tiempo
         if(Tiempo == 0){
-    clearInterval(Restar_Tiempo)
-    Puntaje = 0
+            Tiempo = 71
+            Puntaje = 0
             document.getElementById("Perdiste_sound").play()
             alert("Lo lamento perdiste")} }
 
@@ -102,16 +94,17 @@ function JUEGO(){
         //FUNCION QUE UNICAMENTE AUMENTA PUNTOS Y RESETEA LAS VARIABLES AL LLEGAR A CIERTO LIMITE
         function Aumentar_Puntos(){
             Puntaje++;
-            document.getElementById("Puntaje").innerHTML = Puntaje + "&nbsp;/&nbsp;15"
-            if(Puntaje == 15){
+            document.getElementById("Puntaje").innerHTML = Puntaje + "&nbsp;/&nbsp;5"
+            if(Puntaje == 5){
                 Puntaje = 0 
-                Nivel1_Ganado = true;
-                Tiempolvl2 = Tiempo;
-                
-                
+                Tiempo = 71
 
-                   
-                document.getElementById("Tiempo").innerHTML = Tiempo
+
+                document.getElementById("NEXT").addEventListener('click', Habilitar_Siguienten_LVL)
+                function Habilitar_Siguienten_LVL(){
+                document.getElementById("NIVEL_01").style.display = "none"
+                document.getElementById("NIVEL_02").style.display = "block"}
+                document.getElementById("Tiempo").innerHTML = 70
                 document.getElementById("Puntaje").innerHTML = 0+"&nbsp;/&nbsp;"+27
                 document.getElementById("Triunfo").play()
                 document.getElementById("Fondo_Ciberpunk").pause()
@@ -129,10 +122,9 @@ function JUEGO(){
                     document.getElementById("Meteiorito").style.transition = "0s"
 
                     document.getElementById("Meteiorito2").style.left = "-70%"
-                    document.getElementById("Meteiorito2").style.transition = "0s"
-                }
-                    //ejecutar  solo una vez 
-                    Ganaste_Pantalla()
+                    document.getElementById("Meteiorito2").style.transition = "0s"}
+                    
+                Desbloquear_Pantalla  =  setInterval(Ganaste_Pantalla, 1)
 
                 Swal.fire({
                     title : 'FELICIDADES POR SUPERAR <br> EL NIVEL <br><br> <img src="IMG/Check.png" width = "120px"><br>',
@@ -165,7 +157,7 @@ function JUEGO(){
             document.getElementById("Meteiorito").style.left = Distancia1 + "%"
             document.getElementById("Meteiorito").style.top = Altura1 + "px"}
 
-            Inicio_Meteorito1 = setTimeout(Metiorito_Direccion, 2000)//PRIMERO VA A SER EJECUTADO A LOS DOS PRIMEROS SEGUNDOS
+            setTimeout(Metiorito_Direccion, 2000)//PRIMERO VA A SER EJECUTADO A LOS DOS PRIMEROS SEGUNDOS
             Reanudar_trayectoria = setInterval(Metiorito_Direccion, 2430)//LUEGO SE VA A LLAMAR A LOS METIORITOS CADA 2,4 SEGUNDOS
 
 
@@ -177,7 +169,7 @@ function JUEGO(){
             document.getElementById("Meteiorito2").style.left = Distancia2 + "%"
             document.getElementById("Meteiorito2").style.top = Altura2 + "px"}
 
-            Inicio_Meteorito2 = setTimeout(Metiorito_Direccion2, 2600)//PRIMERO VA A SER EJECUTADO A LOS DOS PRIMEROS SEGUNDOS
+            setTimeout(Metiorito_Direccion2, 2600)//PRIMERO VA A SER EJECUTADO A LOS DOS PRIMEROS SEGUNDOS
             Reanudar_trayectoria2 = setInterval(Metiorito_Direccion2, 2350)//LUEGO SE VA A LLAMAR A LOS METIORITOS CADA 2,3 SEGUNDOS
 
 
@@ -214,20 +206,9 @@ function JUEGO(){
         //ESTA FUNCION SE ENCARGA DE ALERTARTE UNA VEZ EL METIORITO CRUZE LA LINEA CON UN PERDISTE
         //TAMBIEN RESETEA LOS VALORES Y LLEVA A LOS METIORITOS FUERA DEL MAPA DE MANERA INSTANTANEA
         function perdiste (){
-            if(Nivel1_Ganado == true){
-                 return;
-            }
-                const meteorito1 = document.getElementById("Meteiorito");
-                const meteorito2 = document.getElementById("Meteiorito2");
+            if((document.getElementById("Meteiorito").offsetLeft > 630) ||
+            (document.getElementById("Meteiorito2").offsetLeft > 630)) {
 
-                const limite = meteorito1.parentElement.clientWidth * 0.70;
-
-                // Detectar el BORDE DERECHO del meteorito
-                const bordeMeteorito1 = meteorito1.offsetLeft + meteorito1.offsetWidth;
-                const bordeMeteorito2 = meteorito2.offsetLeft + meteorito2.offsetWidth;
-
-                if((bordeMeteorito1 >= limite) ||
-                (bordeMeteorito2 >= limite)) {
                 document.getElementById("Perdiste_sound").play()
                 alert("YA ES DEMASIADO TARDE, LOS METEORITOS DESTRUYERON GRAN PARTE DEL CONTINENTE Y LO MEJOR ES ESPERAR LO PEOR")
                 document.getElementById("Meteiorito").style.left = "-70%"
@@ -236,21 +217,12 @@ function JUEGO(){
                 document.getElementById("Meteiorito2").style.left = "-70%"
                 document.getElementById("Meteiorito2").style.transition = "0s"
                 
-              clearInterval(Restar_Tiempo)
-
-                // DETENER LOS METEORITOS
-                clearInterval(Reanudar_trayectoria)
-                clearInterval(Reanudar_trayectoria2)
-
-                clearTimeout(Inicio_Meteorito1)
-                clearTimeout(Inicio_Meteorito2)
-
-                // MANTENER EL PUNTAJE CONSEGUIDO
-                document.getElementById("Puntaje").innerHTML = Puntaje + "&nbsp;/&nbsp;15"
-                }
+                Tiempo = 71
+                Puntaje = 0 }
+        
             else {
-                document.getElementById("Meteiorito").style.transition = "3.5s"
-                document.getElementById("Meteiorito2").style.transition = "3.5s"} }
+                document.getElementById("Meteiorito").style.transition = "2.4s"
+                document.getElementById("Meteiorito2").style.transition = "2.4s"} }
 
         setInterval(perdiste, 1)//LE COLOCAMOS UNO PARA QUE SIEMPRE SE ESTE EJECUTANDO, DADO A 
         //QUE NO SABEMOS CUANDO EL METIORITO VA A SUPERAR EL LIMITE
@@ -264,257 +236,134 @@ function JUEGO(){
             
             //ESTA FUNCION EJECUTA UN CONJUNTO DE ACCIONES AL PRESIONAR JUGAR
             function PLAY(){
+                document.getElementById("Fondo_Ciberpunk").play()
+                //MUEVE EL TITULO FUERA DEL CONTENEDOR UNA VEZ DE CLICK A JUGAR
+                document.getElementById("Texo").style.left = "-900px" 
+                //MUEVE AL BOTON PLAY TRANS PRESIONAR PRESIONAR AL MISMO BOTON
+                document.getElementById("Contenedor_Mensaje_Star").style.left = "-100%" 
+                    //ESTA FUNCION CONTIENE AL JUEGO COMO TAL
+                    function ARRACAR(){    
+                        JUEGO()}
+                //INVOCA AL JUEGO UNA VEZ PASEN 4 SEGUNDO - OSEA UNA VEZ TERMINE EL CONTADOR
+                tiempo_de_arranque =  setTimeout(ARRACAR, 4100)
+                //ESTA FUNCION EJECUTA LA CUENTA REGRESIVA Y RETIRA LA PANTALLA START 
+                function ESPERAR(){
+                    function Cuenta_rg(){
+                        Conteo--;
+                        document.getElementById("RGB").innerHTML = Conteo
+                        if(Conteo == -1){
+                        document.getElementById("Contenedor_contador").style.display = "none"
+                        function Borrar(){
+                        document.getElementById("Start").style.display = "none"
 
-    // Estado inicial
-    Activo = 1;
+                            DETENER_JUEGO() }//HABILITA LA FUNCION DE PAUSE Y REANUDAR UNA VEZ CARGUE EL JUEGO
+                        setTimeout(Borrar, 500) }  }
+                        setInterval (Cuenta_rg, 1000)}
 
-    // Música desde el clic de JUGAR
-    document.getElementById("Fondo_Ciberpunk").play();
-
-    // Sacar título
-    document.getElementById("Texo").style.left = "-900px";
-
-    // Sacar botón JUGAR
-    document.getElementById("Contenedor_Mensaje_Star").style.left = "-100%";
-
-       // INICIAR JUEGO DESDE EL PRIMER CLICK
-    JUEGO()
-    DETENER_JUEGO()
+                        setTimeout(ESPERAR, 350)}//SE EJECUTARA EN UN LAPSO DE 350, DESPUES DE PRESIONAR EL BOTON
 
 
-  
-
-
-    // CUENTA REGRESIVA
-    function ESPERAR(){
-
-        function Cuenta_rg(){
-
-            Conteo--;
-
-            document.getElementById("RGB").innerHTML = Conteo;
-
-            if(Conteo == -1){
-
-                document.getElementById("Contenedor_contador").style.display = "none";
-
-                function Borrar(){
-
-                    document.getElementById("Start").style.display = "none";
-                }
-
-                setTimeout(Borrar, 500);
-            }
-        }
-
-        setInterval(Cuenta_rg, 1000);
-    }
-
-    setTimeout(ESPERAR, 350);
-}
 
 
 
             //ESTA FUNCION CONTIENE EL REANUDE Y PAUSE DEL BOTON
-         function DETENER_JUEGO(){
+            function DETENER_JUEGO (){
+                //INDICA QUE LA FUNCION DE PAUSE SE EJECUTARA UNA VEZ SE DE CLICK AL BOTON DE PAUSE        
+                document.getElementById("Pause").addEventListener('click', PAUSE)
+                //ESTA VARIABLE INDICA SI SE EJECUTA O NO EL DESPAUSEO
+                Activo = 1 
+                    //HACE QUE EL JUEGO SE DETENGA
+                    function PAUSE(){ //Colocar la funcion de pausa y reanudar
+                        //SI LLEGA A UNA EJECUTA LA FUNCION PAUSE
+                        if (Activo == 1){
+                        
+                        document.getElementById("Fondo_Ciberpunk").pause()
+                        document.getElementById("Pausa_Pantalla").style.display = "table"
+                        clearInterval(Restar_Tiempo)//BORRAMOS LA FUNCION DE TIEMPO
+                        document.getElementById("Tiempo").innerHTML = Tiempo
+                        clearInterval(Reanudar_trayectoria2)
+                        clearInterval(Reanudar_trayectoria)
 
-    const botonPause = document.getElementById("Pause");
+                            function Metiorito_detener (){   
+                            document.getElementById("Meteiorito").style.left = document.getElementById("Meteiorito").offsetLeft + "px" 
+                            document.getElementById("Meteiorito2").style.left = document.getElementById("Meteiorito2").offsetLeft + "px" 
 
-    // Evita registrar varias veces el evento
-    botonPause.onclick = PAUSE;
+                            document.getElementById("Meteiorito").style.top = document.getElementById("Meteiorito").offsetTop + "px" 
+                            document.getElementById("Meteiorito2").style.top = document.getElementById("Meteiorito2").offsetTop + "px" }
 
-    // El juego comienza activo
-    Activo = 1;
+                            Pusae_offf = setInterval(Metiorito_detener, 1) //LE ASEGNAMOS UNA ID, PARA BORRALO UNA VEZ SE DESPAUSEE
+                            Activo = 2} //CAMBIAMOS EL VALOR PARA QUE AL VOLVER A DARLE CLICK EJECUTE LA CONDICIONAL DE REANUDAR
 
-    // Estado inicial del botón
-    botonPause.innerHTML = "<h3>PAUSA</h3>";
-    botonPause.classList.remove("pausado");
+                        else { //LA FUNCION DE REANUDAR
+                            clearInterval(Pusae_offf) //BORRAMOS LA FUNCION, PARA QUE EL REANUDAR PUEDA EJECUTARSE DE NUEVO
+                            document.getElementById("Pausa_Pantalla").style.display = "none"
+                            document.getElementById("Fondo_Ciberpunk").play()
+                            function Tiempo_Disminur(){//VOLVEMOS A CREAR LA FUNCION DE TIEMPO PARA QUE REANUEDE EL CONTEO
+                                Tiempo--;
+                                document.getElementById("Tiempo").innerHTML = Tiempo
+                                if(Tiempo == 0){
+                                    Tiempo = 71
+                                    Puntaje = 0
+                                document.getElementById("Perdiste_sound").play()    
+                                alert("Lo lamento perdiste")
+                                document.getElementById("Meteiorito").style.left = "-70%"
+                                document.getElementById("Meteiorito").style.transition = "0s" //CREAR UNA FUNCION EN BASE A ESTO Y PASAR COMO REANUDAR EN GANASTE
+                
+                                document.getElementById("Meteiorito2").style.left = "-70%"
+                                document.getElementById("Meteiorito2").style.transition = "0s"}
+                                
+                                else{
+                                    document.getElementById("Meteiorito").style.transition = "2.4s"
+                                    document.getElementById("Meteiorito2").style.transition = "2.4s"}}
 
+                        Restar_Tiempo = setInterval(Tiempo_Disminur, 1000)
+        
+                        document.getElementById("Meteiorito").style.left = Distancia1 + "%"
+                        document.getElementById("Meteiorito").style.top = Altura1 + "px"
+                        document.getElementById("Meteiorito").style.transition = "2.4s"
 
-    function PAUSE(){
+                        document.getElementById("Meteiorito2").style.left = Distancia2 + "%"
+                        document.getElementById("Meteiorito2").style.top = Altura2 + "px"
+                        document.getElementById("Meteiorito2").style.transition = "2.4s"
 
-        // =========================
-        // PAUSAR
-        // =========================
-        if(Activo == 1){
-
-            // Pausar música
-            document.getElementById("Fondo_Ciberpunk").pause();
-
-            // Mostrar pantalla de pausa
-            document.getElementById("Pausa_Pantalla").style.display = "table";
-
-            // Detener tiempo
-            clearInterval(Restar_Tiempo);
-
-            // Detener movimiento automático
-            clearInterval(Reanudar_trayectoria);
-            clearInterval(Reanudar_trayectoria2);
-
-            // DETENER TAMBIÉN LOS METEORITOS QUE TODAVÍA NO SALIERON
-                clearTimeout(Inicio_Meteorito1)
-                clearTimeout(Inicio_Meteorito2)
-
-            const meteorito1 = document.getElementById("Meteiorito");
-            const meteorito2 = document.getElementById("Meteiorito2");
-
-            // Obtener posición actual
-            const posicion1 = meteorito1.getBoundingClientRect();
-            const posicion2 = meteorito2.getBoundingClientRect();
-
-            const padre1 = meteorito1.offsetParent.getBoundingClientRect();
-            const padre2 = meteorito2.offsetParent.getBoundingClientRect();
-
-            // Quitar transición
-            meteorito1.style.transition = "0s";
-            meteorito2.style.transition = "0s";
-
-            // Congelar meteorito 1
-            meteorito1.style.left =
-                (posicion1.left - padre1.left) + "px";
-
-            meteorito1.style.top =
-                (posicion1.top - padre1.top) + "px";
-
-            // Congelar meteorito 2
-            meteorito2.style.left =
-                (posicion2.left - padre2.left) + "px";
-
-            meteorito2.style.top =
-                (posicion2.top - padre2.top) + "px";
-
-            // Cambiar botón
-            botonPause.innerHTML = "<h3>REANUDAR</h3>";
-            botonPause.classList.add("pausado");
-
-            Activo = 2;
-        }
-
-
-        // =========================
-        // REANUDAR
-        // =========================
-        else{
-
-            // Ocultar pantalla de pausa
-            document.getElementById("Pausa_Pantalla").style.display = "none";
-
-            // Reanudar música
-            document.getElementById("Fondo_Ciberpunk").play();
-
-            // Cambiar botón
-            botonPause.innerHTML = "<h3>PAUSA</h3>";
-            botonPause.classList.remove("pausado");
+                        
+                        function Metiorito_Direccion(){
+                            Distancia1 = 80
+                            Altura1 = Math.round(Math.random()* 450)
+                
+                            document.getElementById("Meteiorito").style.left = Distancia1 + "%"
+                            document.getElementById("Meteiorito").style.top = Altura1 + "px"}
+                
+                            setTimeout(Metiorito_Direccion, 2000)//PRIMERO VA A SER EJECUTADO A LOS DOS PRIMEROS SEGUNDOS
+                            Reanudar_trayectoria = setInterval(Metiorito_Direccion, 2430)//LUEGO SE VA A LLAMAR A LOS METIORITOS CADA 2,4 SEGUNDOS
+                
+                
+                        //ESTA FUNCION DIRIGE AL PRIMER METIORITO 2 A LA TIERRA         
+                        function Metiorito_Direccion2(){
+                            Distancia2 = 80
+                            Altura2 = Math.round(Math.random()* 450)
+                
+                            document.getElementById("Meteiorito2").style.left = Distancia2 + "%"
+                            document.getElementById("Meteiorito2").style.top = Altura2 + "px"}
+                
+                            setTimeout(Metiorito_Direccion2, 2000)//PRIMERO VA A SER EJECUTADO A LOS DOS PRIMEROS SEGUNDOS
+                            Reanudar_trayectoria2 = setInterval(Metiorito_Direccion2, 2350)//LUEGO SE VA A LLAMAR A LOS METIORITOS CADA 2,3 SEGUNDOS
 
 
-            // REANUDAR TIEMPO
-            function Tiempo_Disminur(){
-
-                Tiempo--;
-
-                document.getElementById("Tiempo").innerHTML = Tiempo;
-
-                if(Tiempo <= 0){
-
-                    Tiempo = 0;
-
-                    clearInterval(Restar_Tiempo);
-
-                    document.getElementById("Tiempo").innerHTML = Tiempo;
-
-                    document.getElementById("Perdiste_sound").play();
-
-                    alert("Lo lamento perdiste");
-                }
-            }
-
-            Restar_Tiempo =
-                setInterval(Tiempo_Disminur, 1000);
 
 
-            // METEORITO 1
-            function Metiorito_Direccion(){
 
-                Distancia1 = 80;
-                Altura1 = Math.round(Math.random() * 450);
-
-                document.getElementById("Meteiorito").style.transition = "3.5s";
-
-                document.getElementById("Meteiorito").style.left =
-                    Distancia1 + "%";
-
-                document.getElementById("Meteiorito").style.top =
-                    Altura1 + "px";
-            }
+                        Activo = 1} } } //CAMBIAMOS EL VALOR DE NUEVO A 1 PARA QUE AL SIGUIENTE CLICK SE EJECUTE EL PAUSE  S
 
 
-            // METEORITO 2
-            function Metiorito_Direccion2(){
 
-                Distancia2 = 80;
-                Altura2 = Math.round(Math.random() * 450);
-
-                document.getElementById("Meteiorito2").style.transition = "3.5s";
-
-                document.getElementById("Meteiorito2").style.left =
-                    Distancia2 + "%";
-
-                document.getElementById("Meteiorito2").style.top =
-                    Altura2 + "px";
-            }
+    
 
 
-            // Lanzar nuevamente
-            Metiorito_Direccion();
-            Metiorito_Direccion2();
 
-            // Crear nuevamente los intervalos
-            Reanudar_trayectoria =
-                setInterval(Metiorito_Direccion, 2430);
 
-            Reanudar_trayectoria2 =
-                setInterval(Metiorito_Direccion2, 2350);
-
-            // Próximo clic vuelve a PAUSA
-            Activo = 1;
-        }
-    }
-}
 
 //TRANSICIONES ENTRE PAGINAS----------------------------------------------------------------------------------
-// BOTONES PARA REGRESAR ENTRE LAS TRES SECCIONES INICIALES
-function Volver_Inicio(){
-    var inicio = document.getElementById('Seccion_01');
-    var reglas = document.getElementById('Reglas');
-
-    inicio.style.display = 'flex';
-    inicio.style.top = '-100%';
-    inicio.style.transition = '0s';
-
-    setTimeout(function(){
-        reglas.style.top = '120%';
-        reglas.style.transition = '1.2s';
-        inicio.style.top = '0%';
-        inicio.style.transition = '1.2s';
-    }, 30);
-}
-
-function Volver_Reglas(){
-    var reglas = document.getElementById('Reglas');
-    var historia = document.getElementById('Seccion_2');
-
-    reglas.style.display = 'block';
-    reglas.style.top = '-100%';
-    reglas.style.transition = '0s';
-
-    setTimeout(function(){
-        historia.style.top = '10%';
-        historia.style.transition = '1.2s';
-        reglas.style.top = '3%';
-        reglas.style.transition = '1.2s';
-    }, 30);
-}
-
 
 
 
@@ -536,19 +385,6 @@ function Mover() {//TRANSICION DE LA PRIMERA SECCION A LA SEGUNDA
 
 }
 
-
-
-// Continuar desde reglas con teclado, como una interfaz de videojuego
-document.addEventListener("keydown", function(event){
-    if ((event.key === "Enter" || event.key === " ") && document.getElementById("Reglas")) {
-        var reglas = document.getElementById("Reglas");
-        var rect = reglas.getBoundingClientRect();
-        if (rect.top > -window.innerHeight && rect.top < window.innerHeight) {
-            event.preventDefault();
-            Mover_2();
-        }
-    }
-});
 
 function Mover_2(){
     var Reglas_Sacar = document.getElementById("Reglas") 
@@ -591,7 +427,7 @@ var Supremo = document.getElementById("Seccion_suprema")
 document.getElementById("narracion").pause()
 contenedor_2.style.top = "-100%"
 contenedor_2.style.transition = "1.4s"
-Supremo.style.height = "100vh" //Le aumente para que no tape al contenedor del juego
+Supremo.style.height = "160vh" //Le aumente para que no tape al contenedor del juego
 
 
     function Desaparaceer3(){

@@ -322,13 +322,6 @@ margin-left: 12%; }
 
 
 
-/* 12 - CONTENEDOR FECHA Y HORA */
-.Fecha,
-.Hora {
-    box-sizing: border-box;
-    max-width: 100%;
-    overflow: hidden;
-}
 
 .Hora {
     display: flex;
@@ -1664,3 +1657,174 @@ html, body {
 }
 
 
+
+
+/* NIVEL 1 - DISEÑO VISUAL DEL NIVEL 2 */
+
+#NIVEL_01 .Contenedor {
+    border: 3px solid rgb(0, 119, 255);
+    border-radius: 0;
+    box-shadow:
+        0 0 8px rgba(0, 119, 255, 0.9),
+        0 0 20px rgba(0, 119, 255, 0.5),
+        inset 0 0 20px rgba(0, 119, 255, 0.25);
+}
+
+#NIVEL_01 .Cabezera {
+    border: 0;
+    border-bottom: 2px solid rgb(0, 119, 255);
+    background: linear-gradient(
+        90deg,
+        rgba(0, 119, 255, 0.18),
+        rgba(0, 0, 0, 0.65),
+        rgba(0, 119, 255, 0.18)
+    );
+    box-shadow: 0 0 10px rgba(0, 119, 255, 0.4);
+}
+
+#NIVEL_01 .Tiempo,
+#NIVEL_01 .Puntaje {
+    color: white;
+    text-shadow: 0 0 5px rgba(77, 184, 255, 0.8);
+}
+
+/* ===== NIVEL 1: MISMO DISEÑO QUE NIVEL 2 ===== */
+
+/* BOTÓN PAUSAR */
+#NIVEL_01 #Pause.Pause {
+    background: rgba(0, 119, 255, 0.75) !important;
+    border: 2px solid #4db8ff !important;
+    color: white !important;
+    font-family: 'Press Start 2P', cursive;
+    box-shadow:
+        0 0 8px rgba(0, 119, 255, 0.7),
+        inset 0 0 8px rgba(77, 184, 255, 0.25);
+}
+
+#NIVEL_01 #Pause.Pause:hover {
+    background: rgb(0, 145, 255) !important;
+    box-shadow: 0 0 20px rgba(0, 119, 255, 0.8);
+}
+
+#NIVEL_01 #Pause.Pause:active {
+    transform: scale(0.97);
+}
+
+/* BOTÓN ACEPTAR MISIÓN */
+#NIVEL_01 .Play {
+    background: rgb(0, 119, 255) !important;
+    border: 2px solid rgba(100, 200, 255, 0.8);
+    border-radius: 0;
+    color: white;
+    box-shadow:
+        0 0 10px rgba(0, 119, 255, 0.6),
+        0 0 20px rgba(0, 119, 255, 0.25);
+    font-family: 'Press Start 2P', cursive;
+    top: auto;
+    bottom: 15%;
+}
+
+#NIVEL_01 .Play:hover {
+    background: rgb(0, 145, 255) !important;
+    filter: brightness(1.15);
+}
+
+/* PANTALLA DE INICIO */
+#NIVEL_01 .Start {
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(0, 119, 255, 0.12),
+            rgba(0, 0, 0, 0.75)
+        ),
+        rgba(0, 0, 0, 0.58);
+}
+
+/* TÍTULO PRINCIPAL */
+#NIVEL_01 .Texo {
+    text-shadow:
+        0 0 5px white,
+        0 0 12px rgba(0, 119, 255, 0.8);
+}
+
+/* BARRA DE TIEMPO Y PUNTAJE */
+#NIVEL_01 .Cabezera {
+    border-bottom: 2px solid #0077ff;
+    background: linear-gradient(
+        90deg,
+        rgba(0, 119, 255, 0.18),
+        rgba(0, 0, 0, 0.65),
+        rgba(0, 119, 255, 0.18)
+    );
+}
+
+/* BORDES DEL JUEGO */
+#NIVEL_01 .Contenedor {
+    border: 3px solid #0077ff;
+    border-radius: 0;
+    box-shadow:
+        0 0 8px rgba(0, 119, 255, 0.9),
+        0 0 20px rgba(0, 119, 255, 0.5),
+        inset 0 0 20px rgba(0, 119, 255, 0.25);
+}
+
+/* RECUADRO NIVEL 01 */
+
+#NIVEL_01 .Etiqueta_Nivel1 {
+    display: table !important;
+    margin: 15px auto !important;
+    padding: 8px 18px !important;
+
+    background: rgba(0, 119, 255, 0.15) !important;
+    border: 2px solid #0077ff !important;
+
+    color: #4db8ff !important;
+    font-family: 'Press Start 2P', cursive !important;
+    font-size: 15px !important;
+
+    text-align: center !important;
+    text-shadow: 0 0 8px #4db8ff !important;
+    box-shadow: 0 0 10px rgba(0, 119, 255, 0.5) !important;
+}
+
+
+/* NIVEL 1 - LETRAS IGUALES AL NIVEL 2 */
+
+#NIVEL_01 .Dificultad_Nivel1 {
+    font-family: 'Press Start 2P', cursive !important;
+    font-size: 18px !important;
+    font-weight: bold !important;
+    color: white !important;
+    text-align: center !important;
+    margin-bottom: 15px !important;
+}
+
+/* GOLPES CÓSMICOS EN AZUL BRILLANTE */
+
+#NIVEL_01 .Dificultad_Nivel1 span {
+    font-family: inherit !important;
+    font-size: inherit !important;
+    color: #4db8ff !important;
+
+    text-shadow:
+        0 0 5px #4db8ff,
+        0 0 10px #0077ff,
+        0 0 18px rgba(0, 119, 255, 0.8) !important;
+}
+
+/* NIVEL 1 - BORDE DEL CUADRO VERDE NEÓN */
+
+#NIVEL_01 .Contenedor {
+    border: 3px solid #39ff14 !important;
+    box-shadow:
+        0 0 8px #39ff14,
+        0 0 18px rgba(57, 255, 20, 0.8),
+        0 0 35px rgba(57, 255, 20, 0.5),
+        inset 0 0 15px rgba(57, 255, 20, 0.25) !important;
+}
+
+/* OCULTAR COMPLETAMENTE FECHA Y HORA */
+
+.Contenedor_Reloj {
+    display: none !important;
+}

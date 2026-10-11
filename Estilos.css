@@ -3126,9 +3126,9 @@ body.vista-juego .Seccion_Juego {
 
 /* Tablero: mantiene una proporción adecuada */
 .Contenedorlvl2:not(.Cabezeralvl2) {
-    height: auto;
-    aspect-ratio: 2 / 1;
-    max-height: 450px;
+    height: min(500px, 52vh);
+    aspect-ratio: auto;
+    max-height: none;
 }
 
 /* Cabecera adaptable */
@@ -3212,7 +3212,7 @@ body.vista-juego .Seccion_Juego {
     }
 
     .Contenedorlvl2:not(.Cabezeralvl2) {
-        height: 300px;
+        height: min(500px, 52vh);
         aspect-ratio: auto;
     }
 

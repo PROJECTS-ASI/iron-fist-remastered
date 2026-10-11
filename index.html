@@ -242,8 +242,7 @@
                             </div>
 
                             <p class="Texto_mision_inicio">.</p>
-                            <br> <button class="Play" id="Play" type="button">ACEPTAR
-                                MISIÓN</button><!--Botón de confirmar misión-->
+                            <br> <button class="Play" id="Play" type="button">JUGAR</button><!--Botón de confirmar misión-->
                         </div>
                         <div id="Contenedor_contador"><span id="RGB"></span></div><!--Span que contiene el conteo-->
                     </div>
@@ -669,6 +668,32 @@
                 el.style.left = '80%';
                 el.style.top = (Math.round(Math.random() * 380) + 20) + 'px';
             }
+            function reiniciarNivel1() {
+                const play = $('Play'); if (play) play.style.pointerEvents = 'none';
+                let cuenta = 3;
+                const start = $('Start'), msg = $('Contenedor_Mensaje_Star'),
+                    contador = $('Contenedor_contador'), rgb = $('RGB');
+
+                nivel1Iniciado = false; puntosNivel1 = 0; tiempoNivel1 = 70; actualizarHUD();
+
+                if (start) start.style.display = 'flex';
+                if (msg) msg.style.display = 'none';            // oculta título y botón JUGAR, deja solo el número
+                if (contador) contador.style.display = 'table';
+                if (rgb) rgb.textContent = cuenta;
+
+                const intervalo = setInterval(() => {
+                    cuenta--;
+                    if (cuenta >= 1) {
+                        rgb.textContent = cuenta;
+                    } else {
+                        clearInterval(intervalo);
+                        if (play) play.style.pointerEvents = 'auto';
+                        if (contador) contador.style.display = 'none';
+                        if (msg) msg.style.display = '';        // lo restaura por si se vuelve a mostrar Start
+                        iniciarNivel1();                         // arranca solo, sin volver a pulsar JUGAR
+                    }
+                }, 1000);
+            }
             function perderNivel(motivo) {
                 if (!nivel1Iniciado || nivel1Ganado) return;
                 limpiarTimersNivel1();
@@ -678,17 +703,19 @@
                 resetMeteorito('Meteiorito'); resetMeteorito('Meteiorito2');
                 const sonido = $('Perdiste_sound'); if (sonido) { sonido.currentTime = 0; sonido.play().catch(() => { }); }
                 Swal.fire({
-                    title: 'PARTIDA TERMINADA',
-                    text: motivo || 'Se terminó el intento. Puedes volver a intentarlo.',
-                    icon: 'warning',
-                    confirmButtonText: 'VOLVER A INTENTAR',
+                    title: 'MISIÓN FALLIDA <br><br> <img src="IMG/Chems.gif" width="120px">',
+                    html: motivo || 'Se terminó el intento. Puedes volver a intentarlo.',
+                    icon: 'error',
+                    confirmButtonText: 'INTENTAR DE NUEVO',
+                    width: '50%',
+                    background: 'radial-gradient(circle at center, rgba(255,40,40,0.35), rgba(20,0,0,0.95))',
+                    color: '#fff',
                     allowOutsideClick: false,
-                    allowEscapeKey: false
+                    allowEscapeKey: false,
+                    allowEnterKey: false,
+                    preConfirm: () => { Swal.getConfirmButton().disabled = true }
                 }).then(() => {
-                    nivel1Iniciado = false; puntosNivel1 = 0; tiempoNivel1 = 70; actualizarHUD();
-                    const start = $('Start'); if (start) start.style.display = 'flex';
-                    const contador = $('Contenedor_contador'); if (contador) contador.style.display = 'none';
-                    $('Play')?.focus();
+                    reiniciarNivel1();
                 });
             }
             function ganarNivel1() {
@@ -701,12 +728,15 @@
                 if ($('NEXT')) $('NEXT').classList.add('habilitado');
                 const triunfo = $('Triunfo'); if (triunfo) { triunfo.currentTime = 0; triunfo.play().catch(() => { }); }
                 Swal.fire({
-                    title: '¡NIVEL SUPERADO!',
-                    text: 'Has protegido la Tierra. Ahora puedes continuar con el siguiente nivel.',
-                    icon: 'success',
-                    confirmButtonText: 'CONTINUAR',
-                    allowOutsideClick: false,
-                    allowEscapeKey: false
+                    title: 'FELICIDADES POR SUPERAR <br> EL NIVEL <br><br> <img src="IMG/Check.png" width="120px"><br>',
+                    html: '¿VERDAD QUE FUE DIFÍCIL?. Prepárate para el siguiente nivel que las cosas van a empeorar. Agradecemos tu dedicación en pasar este nivel, esperemos que puedas seguir defendiendo la tierra de esa manera y mejores tu habilidad de reacción ',
+                    confirmButtonText: 'QUIERO CONTINUAR',
+                    width: '50%',
+                    timer: 100000,
+                    timerProgressbar: true,
+                    allowOutsideClick: true,
+                    allowEscapeKey: false,
+                    allowEnterKey: false
                 })
             }
             function sumarPunto() {
@@ -749,12 +779,12 @@
                     if (!pausaNivel1 && nivel1Iniciado) {
                         const a = $('Meteiorito'), b = $('Meteiorito2');
                         if ((a && a.offsetLeft > Math.max(450, (a.parentElement?.clientWidth || 900) * .69)) || (b && b.offsetLeft > Math.max(450, (b.parentElement?.clientWidth || 900) * .69))) {
-                            perderNivel('Un meteorito cruzó la línea de seguridad.');
+                            perderNivel('LOS METEORITOS DESTRUYERON GRAN PARTE DEL CONTINENTE<br>LO MEJOR ES ESPERAR LO PEOR');
                         }
                     }
                 }, 150);
             }
-            $('Play')?.addEventListener('click', iniciarNivel1);
+            $('Play')?.addEventListener('click', reiniciarNivel1);
 
             // Avance de niveles: el botón SIGUIENTE queda activo solo cuando corresponde.
             let nivelActualJuego = 1;

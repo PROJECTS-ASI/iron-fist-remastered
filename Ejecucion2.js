@@ -179,7 +179,7 @@ function JUEGOlvl2() {
         if ((document.getElementById("Meteioritolvl2").offsetLeft > 630) ||
             (document.getElementById("Meteiorito2lvl2").offsetLeft > 630) ||
             (document.getElementById("Meteiorito3lvl2").offsetLeft > 630)) {
-            Perdiste_Alertalvl2('LOS METEORITOS DESTRUYERON GRAN PARTE DEL CONTINENTE.<br>LO MEJOR ES ESPERAR LO PEOR')
+            Perdiste_Alertalvl2('LOS METEORITOS DESTRUYERON GRAN PARTE DEL CONTINENTE<br>LO MEJOR ES ESPERAR LO PEOR')
         } else {
             document.getElementById("Meteioritolvl2").style.transition = "2s"
             document.getElementById("Meteiorito2lvl2").style.transition = "2s"

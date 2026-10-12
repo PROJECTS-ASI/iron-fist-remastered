@@ -36,7 +36,7 @@ function JUEGOlvl2() {
 
             document.getElementById("Tiempolvl2").innerHTML = 60
             document.getElementById("Puntajelvl2").innerHTML = Puntajelvl2 + "&nbsp;/&nbsp;" + 20 //MEJORA
-            document.getElementById("Fondo_Ciberpunk").pause()
+            document.getElementById("Music_level2").pause()
             document.getElementById("Triunfo").play()
             document.getElementById("NEXT").addEventListener('click', Habilitar_Siguienten_LVL)
             function Habilitar_Siguienten_LVL() {
@@ -194,7 +194,7 @@ function JUEGOlvl2() {
         EnDerrotalvl2 = true
 
         document.getElementById("Perdiste_sound").play()
-        document.getElementById("Fondo_Ciberpunk").pause()
+        document.getElementById("Music_level2").pause()
 
         //DETENEMOS TIEMPO Y TRAYECTORIAS
         clearInterval(Restar_Tiempolvl2)
@@ -264,7 +264,7 @@ function JUEGOlvl2() {
                 document.getElementById("Playlvl2").style.pointerEvents = "auto" //MEJORA: restaura por si se vuelve a mostrar Startlvl2 en otro contexto
                 document.getElementById("Contenedor_contadorlvl2").style.display = "none"
 
-                document.getElementById("Fondo_Ciberpunk").play()
+                document.getElementById("Music_level2").play()
 
                 //REACTIVAMOS TIEMPO Y TRAYECTORIAS
                 Restar_Tiempolvl2 = setInterval(Tiempo_Disminurlvl2, 1000)
@@ -301,7 +301,7 @@ function PLAYlvl2() {
     if (JuegoYaIniciadolvl2) return //AGREGADO
     JuegoYaIniciadolvl2 = true //AGREGADO
 
-    document.getElementById("Fondo_Ciberpunk").play()
+    document.getElementById("Music_level2").play()
     //MUEVE EL TITULO FUERA DEL CONTENEDOR UNA VEZ DE CLICK A JUGAR
     document.getElementById("Texolvl2").style.left = "-900px"
     //MUEVE AL BOTON PLAY TRANS PRESIONAR PRESIONAR AL MISMO BOTON
@@ -348,7 +348,7 @@ function DETENER_JUEGOlvl2() {
         //SI LLEGA A UNA EJECUTA LA FUNCION PAUSE
         if (Activolvl2 == 1) {
             document.getElementById("Pausa_Pantallalvl2").style.display = "table"
-            document.getElementById("Fondo_Ciberpunk").pause()
+            document.getElementById("Music_level2").pause()
             clearInterval(Restar_Tiempolvl2)//BORRAMOS LA FUNCION DE TIEMPO
             document.getElementById("Tiempolvl2").innerHTML = Tiempolvl2
             clearInterval(Reanudar_trayectorialvl2)
@@ -372,7 +372,7 @@ function DETENER_JUEGOlvl2() {
         else { //LA FUNCION DE REANUDAR
             clearInterval(Pusae_offflvl2)
             document.getElementById("Pausa_Pantallalvl2").style.display = "none"
-            document.getElementById("Fondo_Ciberpunk").play()
+            document.getElementById("Music_level2").play()
             function Tiempo_Disminurlvl2() {//VOLVEMOS A CREAR LA FUNCION DE TIEMPO PARA QUE REANUEDE EL CONTEO
                 Tiempolvl2--;
                 document.getElementById("Tiempolvl2").innerHTML = Tiempolvl2

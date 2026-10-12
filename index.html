@@ -206,7 +206,7 @@
                     <!--IMAGENES DEBTRO DE JUEGO-->
                     <img src="IMG/Metiorito.png" width="70px" class="Meteiorito" id="Meteiorito">
                     <img src="IMG/Metiorito.png" width="70px" class="Meteiorito" id="Meteiorito2">
-                    <img src="IMG/planeta_tierra_HD.svg" width="400px" class="Planeta">
+                   <img src="IMG/planeta_tierra3.png" width="400px" class="Planeta">
                     <!--Limite dentro del tablero del juego-->
                     <div class="Limite"></div>
 
@@ -215,7 +215,22 @@
                     <!--Pantalla principal al ingresar al juego START-->
                     <div class="Start" id="Start">
                         <div class="Contenedor_Mensaje_Star" id="Contenedor_Mensaje_Star">
-                            <h1 class="Texo" id="Texo">¿LISTO PARA SALVAR<br> EL MUNDO? -> LVL: 1</h1>
+                            
+                                                    <div class="Info_Nivel1">
+                            <div class="Dificultad_Nivel1">
+                                DIFICULTAD:
+                                <span>GOLPES CÓSMICOS</span>
+                            </div>
+                             
+
+                            <div class="Etiqueta_Nivel1">
+                                NIVEL 01
+                            </div>
+                        </div>
+
+                        <h1 class="Texo" id="Texo">
+                            ¿LISTO PARA SALVAR<br> EL MUNDO?
+                        </h1>
                             <!--Titulo de la seccion start-->
 
 
@@ -223,9 +238,7 @@
                             <div
                                 style="display: flex; justify-content: center; align-items: center; position: relative; width: 100%; gap: 25px;">
                                 <!-- <div style="display: flex; justify-content: center; position: absolute; width: 100%;"cambio que esta ahi por defauld> -->
-                                <img src="IMG/Metiorito.png" width="18%" id="chems1">
-                                <h1 class="Pollo">Dificultad: Golpes Cósmicos</h1>
-                                <img src="IMG/Metiorito.png" width="18%" id="chems2">
+                               
                             </div>
 
                             <p class="Texto_mision_inicio">.</p>
@@ -281,6 +294,7 @@
                 <!--Contenedor general del juego-->
                 <div class="Contenedorlvl2">
                     <!--IMAGENES DEBTRO DE JUEGO-->
+                    <audio id="Music_level2" src="shell.mp3" preload="auto" autoplay loop></audio>
                     <img src="IMG/Metiorito.png" width="70px" class="Meteioritolvl2" id="Meteioritolvl2">
                     <img src="IMG/Metiorito.png" width="70px" class="Meteioritolvl2" id="Meteiorito2lvl2">
                     <img src="IMG/Metiorito.png" width="70px" class="Meteioritolvl2" id="Meteiorito3lvl2">
@@ -362,11 +376,11 @@
                 <div class="Contenedorlvl3">
                     <!--IMAGENES DEBTRO DE JUEGO-->
                     <audio id="Music_level3" src="shell.mp3" preload="auto" autoplay loop></audio>
-                    <img src="IMG/Metiorito.png" width="70px" class="Meteoritolvl3" id="Meteoritolvl3">
-                    <img src="IMG/Metiorito.png" width="70px" class="Meteoritolvl3" id="Meteorito2lvl3">
-                    <img src="IMG/Metiorito.png" width="70px" class="Meteoritolvl3" id="Meteorito3lvl3">
-                    <img src="IMG/Metiorito.png" width="70px" class="Meteoritolvl3" id="Meteorito4lvl3">
-                    <img src="IMG/planeta_tierra.png" width="400px" class="Planetalvl3">
+                    <img src="IMG/meteorito3.png" width="70px" class="Meteoritolvl3" id="Meteoritolvl3">
+                    <img src="IMG/meteorito3.png" width="70px" class="Meteoritolvl3" id="Meteorito2lvl3">
+                    <img src="IMG/meteorito3.png" width="70px" class="Meteoritolvl3" id="Meteorito3lvl3">
+                    <img src="IMG/meteorito3.png" width="70px" class="Meteoritolvl3" id="Meteorito4lvl3">
+                    <img src="IMG/planeta_tierra3.png" width="400px" class="Planetalvl3">
 
                     <!--Limite dentro del tablero del juego-->
 
@@ -493,16 +507,14 @@
                 </div>
 
                 <div class="Nada" id="Nada">
-                    <h2>Una vez completes este nivel, se habilitará la opcion "SIGUIENTE".</h2>
+                    <h2>Una vez completes este nivel, se habilitará la opcion "SIGUIENTE NIVEL".</h2>
                     <p>Recuerda que los niveles son progresivos
                         y mejorarán tu nivel de reacción ante estímulos y mucho más importante, te dará una gran
                         sorpresa al final, así que recuerda
                         no perdértela y no parar de intentar
                     </p>
                 </div>
-                <div class="NEXT" id="NEXT">
-                    <h2>SIGUIENTE NIVEL&nbsp;&nbsp;&nbsp;<i class="fas fa-arrow-right"></i></h2>
-                </div>
+                <div class="NEXT" id="NEXT">SIGUIENTE NIVEL</div>
             </div>
 
 
@@ -650,6 +662,8 @@
             }
             function lanzarMeteorito(id) {
                 const el = $(id); if (!el) return;
+                el._destino = '80%';
+                el._duracion = '2.4s';
                 el.style.left = '80%';
                 el.style.top = (Math.round(Math.random() * 380) + 20) + 'px';
             }
@@ -700,6 +714,8 @@
                 actualizarHUD();
                 // Expulsa el meteorito que fue golpeado
                 if (this && this.style) {
+                    this._destino = '-500px';
+                    this._duracion = '1.8s';
                     this.style.transition = '1.8s';
                     this.style.left = '-500px';
                     this.style.top = (Math.round(Math.random() * 450)) + 'px';
@@ -718,7 +734,7 @@
                     const el = $(id); if (!el) return;
                     el.onmouseenter = sumarPunto;
                     resetMeteorito(id);
-                    setTimeout(() => lanzarMeteorito(id), 500 + i * 900);
+                    setTimeout(() => { if (!pausaNivel1 && nivel1Iniciado) lanzarMeteorito(id); }, 500 + i * 900);
                 });
                 timerNivel1 = setInterval(() => {
                     if (pausaNivel1 || !nivel1Iniciado) return;
@@ -750,6 +766,7 @@
                     if ($('Startlvl2')) $('Startlvl2').style.display = 'flex';
                 } else if (nivelActualJuego === 2) {
                     nivelActualJuego = 3;
+                    $('NEXT').textContent = 'FINALIZAR JUEGO';
                     $('NEXT').classList.remove('habilitado');
                     if ($('NIVEL_02')) $('NIVEL_02').style.display = 'none';
                     if ($('NIVEL3')) $('NIVEL3').style.display = 'block';
@@ -758,8 +775,40 @@
                         try { if (typeof JUEGOlvl3 === 'function') JUEGOlvl3(); } catch (e) { }
                         if ($('Startlvl3')) $('Startlvl3').style.display = 'none';
                     }, 120);
+                } else if (nivelActualJuego === 3) {
+                    // Chrome solo permite cerrar automáticamente pestañas abiertas por un script.
+                    window.close();
+                    // Si Chrome bloquea el cierre, mostrar instrucciones en la página.
+                    setTimeout(() => {
+                        document.body.innerHTML = `
+                            <main style="min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:18px;padding:24px;box-sizing:border-box;background:#080812;color:#fff;text-align:center;font-family:Arial,sans-serif">
+                                <h1 style="color:#a8ff60">¡JUEGO FINALIZADO!</h1>
+                                <p>Chrome no permite que esta página cierre la pestaña automáticamente.</p>
+                                <p>Para salir, cierra esta pestaña con la <strong>X</strong> o pulsa <strong>Ctrl + W</strong>.</p>
+                            </main>`;
+                    }, 150);
                 }
             });
+
+            function congelarMeteoritos() {
+                ['Meteiorito', 'Meteiorito2'].forEach(id => {
+                    const el = $(id); if (!el) return;
+                    const cs = getComputedStyle(el);
+                    const left = cs.left, top = cs.top;   // posición actual en px (incluye la transición en curso)
+                    el.style.transition = '0s';
+                    el.style.left = left;
+                    el.style.top = top;
+                });
+            }
+
+            function reanudarMeteoritos() {
+                ['Meteiorito', 'Meteiorito2'].forEach(id => {
+                    const el = $(id); if (!el || !el._destino) return;
+                    void el.offsetWidth;                  // fuerza reflow para aplicar el estado congelado
+                    el.style.transition = el._duracion || '2.4s';
+                    el.style.left = el._destino;
+                });
+            }
 
             $('Pause')?.addEventListener('click', () => {
                 if (!nivel1Iniciado || nivel1Ganado) return;
@@ -768,6 +817,9 @@
                 if (btn) { btn.setAttribute('aria-pressed', String(pausaNivel1)); const h = btn.querySelector('h3'); if (h) h.textContent = pausaNivel1 ? 'REANUDAR' : 'PAUSAR'; }
                 if (pantalla) pantalla.style.display = pausaNivel1 ? 'table' : 'none';
                 const musica = $('Fondo_Ciberpunk'); if (musica) { if (pausaNivel1) musica.pause(); else musica.play().catch(() => { }); }
+
+                if (pausaNivel1) congelarMeteoritos();
+                else reanudarMeteoritos();
             });
 
             // Evita que un clic fuera del carrusel o un cambio de tamaño rompa la pantalla.

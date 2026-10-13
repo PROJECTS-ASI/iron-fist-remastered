@@ -603,18 +603,6 @@
                 if (narracionActiva) { $('narracion')?.pause(); narracionActiva = false; actualizarNarracion(false); }
                 mostrarSeccion('juego');
 
-                // ===== SOLO PRUEBA: salta directo al nivel 3 (poner en false o borrar al terminar) =====
-                const PRUEBA_NIVEL3 = true;
-                if (PRUEBA_NIVEL3) {
-                    nivelActualJuego = 3;
-                    if ($('NIVEL_01')) $('NIVEL_01').style.display = 'none';
-                    if ($('NIVEL_02')) $('NIVEL_02').style.display = 'none';
-                    if ($('NIVEL3')) $('NIVEL3').style.display = 'block';
-                    if ($('Startlvl3')) $('Startlvl3').style.display = 'flex';
-                    return;
-                }
-                // ===== FIN PRUEBA =====
-
                 const start = $('Start');
                 if (start) start.style.display = 'flex';
                 const contador = $('Contenedor_contador');

@@ -1,4 +1,4 @@
-/* IRON FIST — NIVEL 3 */
+/* IRON FIST — NIVEL 3 | meteoritos giratorios y dificultad ajustada */
 (() => {
     "use strict";
     const $ = id => document.getElementById(id);
